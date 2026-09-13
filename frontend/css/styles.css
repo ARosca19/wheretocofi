@@ -30,7 +30,7 @@ body{
   color:var(--ink);
   font-family:'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
   opacity:1;
-  transform:translateY(0);
+  transform:none;
   transition:opacity .22s ease, transform .22s ease;
 }
 
@@ -4301,9 +4301,10 @@ body.photo-modal-open{
 /* mobile: cerc mic cu poza robotului + norișor temporar */
 @media (max-width:820px){
   .ai-floating.ai-mobile-orb{
+    position:fixed !important;
     left:16px;
     right:auto;
-    bottom:18px;
+    bottom:calc(18px + env(safe-area-inset-bottom, 0px));
     min-width:0;
     width:62px;
     height:62px;
