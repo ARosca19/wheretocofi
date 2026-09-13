@@ -14,12 +14,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   btnAI.addEventListener("click", () => {
     lastFocusedElement = document.activeElement;
+    popup.classList.remove("is-closing", "is-open");
+    popup.classList.add("is-opening");
     popup.hidden = false;
     document.body.classList.add("ai-popup-visible");
-    requestAnimationFrame(() => {
-      popup.classList.add("is-open");
-      input.focus({ preventScroll: true });
-    });
+    void popup.offsetWidth;
+    popup.classList.remove("is-opening");
+    popup.classList.add("is-open");
+    input.focus({ preventScroll: true });
   });
 
   closeBtn?.addEventListener("click", closePopup);
@@ -42,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     popup.classList.add("is-closing");
     window.setTimeout(() => {
       popup.hidden = true;
-      popup.classList.remove("is-closing");
+      popup.classList.remove("is-closing", "is-open");
       document.body.classList.remove("ai-popup-visible");
       lastFocusedElement?.focus?.({ preventScroll: true });
     }, closeDuration);
