@@ -39,6 +39,7 @@ OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-5").strip()
 OPENAI_TIMEOUT_SECONDS = int(os.getenv("OPENAI_TIMEOUT_SECONDS", "30"))
 
 BASE_DIR = os.path.dirname(__file__)
+FRONTEND_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "frontend"))
 UPLOAD_ROOT = os.path.join(BASE_DIR, "uploads")
 CAFE_UPLOAD_DIR = os.path.join(UPLOAD_ROOT, "cafes")
 os.makedirs(CAFE_UPLOAD_DIR, exist_ok=True)
@@ -2592,3 +2593,7 @@ def ai_ask(
             else "I could not find a clear match in the app data. Ask me about a drink, brewing method, bean type, area, or recommendation such as strong coffee, evening coffee, cold coffee, milk-based coffee or no-milk coffee."
         )
     )
+
+
+# Keep this mount last so API routes take precedence over frontend files.
+app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
