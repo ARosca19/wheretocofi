@@ -245,38 +245,38 @@
   <div id="aiPopup" class="ai-popup" hidden>
     <div class="ai-popup-backdrop" id="aiPopupBackdrop"></div>
 
-    <section class="ai-popup-card" role="dialog" aria-modal="true">
-      <button id="aiPopupClose" class="ai-popup-close" type="button">×</button>
+    <section class="ai-popup-card" role="dialog" aria-modal="true" aria-labelledby="aiPopupTitle">
+      <button id="aiPopupClose" class="ai-popup-close" type="button" aria-label="Close assistant">&times;</button>
 
       <div class="ai-popup-head">
-        <div>
-          <h2>AI Coffee Assistant✨</h2>
-          <p>I am your coffee assistant. Ask me about coffee, ingredients or cafés — I use real reviews and data from the app to suggest the best options for you.</p>
+        <img src="assets/ai-robot-coffee.png" alt="" class="ai-popup-avatar" aria-hidden="true">
+        <div class="ai-popup-title-wrap">
+          <h2 id="aiPopupTitle">AI Coffee Assistant</h2>
+          <p><span class="ai-status-dot" aria-hidden="true"></span>Ready to help with coffee and cafe choices</p>
         </div>
       </div>
 
       <div id="aiChatMessages" class="ai-chat-messages">
         <div class="ai-message ai-message-bot">
-          <strong>Hello!</strong><br><br>
-
-          I use real café data and user reviews to help you choose better.<br><br>
-
-          Try asking:<br>
-          • Where can I find a good cappuccino?<br>
-          • What is a stronger coffee?<br>
-          • Which cafés have matcha?<br>
-          • What should I drink in the evening?
+          <strong>Hello!</strong><br>
+          Tell me what you feel like drinking and I will find a fitting option.
         </div>
-              </div>
+        <div class="ai-quick-prompts" aria-label="Suggested questions">
+          <button type="button" data-ai-question="Where can I find a good cappuccino?">Good cappuccino</button>
+          <button type="button" data-ai-question="Which cafes have matcha?">Cafes with matcha</button>
+          <button type="button" data-ai-question="What should I drink in the evening?">Evening coffee</button>
+        </div>
+      </div>
 
       <form id="aiChatForm" class="ai-chat-form">
         <input
           id="aiChatInput"
           type="text"
-          placeholder="Example: Where can I drink a stronger coffee?"
+          placeholder="Ask about coffee or cafes..."
           autocomplete="off"
+          aria-label="Question for the coffee assistant"
         />
-        <button type="submit">Ask</button>
+        <button type="submit" aria-label="Send question">Ask</button>
       </form>
     </section>
   </div>
