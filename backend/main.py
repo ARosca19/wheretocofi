@@ -646,6 +646,17 @@ class AiAskOut(BaseModel):
 app = FastAPI(title="WhereToCofi (Auth + Cafenele, SQLite)")
 app.mount("/uploads", StaticFiles(directory=UPLOAD_ROOT), name="uploads")
 
+
+@app.middleware("http")
+async def disable_frontend_asset_cache(request, call_next):
+    response = await call_next(request)
+    path = request.url.path.lower()
+    if path == "/" or path.endswith((".html", ".css", ".js")):
+        response.headers["Cache-Control"] = "no-store, max-age=0"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+    return response
+
 # =========================== STARTUP HOOKS ================================
 
 @app.on_event("startup")
