@@ -29,6 +29,25 @@ body{
   background:var(--bg);
   color:var(--ink);
   font-family:'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+  opacity:1;
+  transform:translateY(0);
+  transition:opacity .22s ease, transform .22s ease;
+}
+
+body.page-leaving{
+  opacity:0;
+  transform:translateY(8px);
+}
+
+@media (prefers-reduced-motion: reduce){
+  body{
+    transition:none;
+  }
+
+  body.page-leaving{
+    opacity:1;
+    transform:none;
+  }
 }
 
 .app{

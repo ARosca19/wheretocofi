@@ -1,3 +1,12 @@
+function smoothNavigate(url, delay = 180) {
+  if (!url) return;
+
+  document.body?.classList?.add("page-leaving");
+  window.setTimeout(() => {
+    window.location.href = url;
+  }, delay);
+}
+
 async function api(path, opts = {}) {
   const headers = opts.headers || {};
   const token = getToken();
@@ -22,7 +31,7 @@ async function api(path, opts = {}) {
     // păstrez semnătura ta de toast (cu redirect) doar dacă o ai implementată așa;
     // altfel îl fac simplu:
     showToast("Sesiunea a expirat. Te rugăm să te reconectezi.", "error", 1700);
-    setTimeout(() => (window.location.href = "login.html"), 1700);
+    setTimeout(() => smoothNavigate("login.html"), 1700);
     return;
   }
 

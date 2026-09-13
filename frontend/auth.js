@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
           const target = window.location.origin + "/frame1.html";
           console.log("[LOGIN] redirecting to", target);
-          window.location.href = target;
+          smoothNavigate(target);
         }, 600);
       } catch (err) {
         console.error("[LOGIN] api error:", err);
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
           const target = window.location.origin + "/login.html";
           console.log("[SIGNUP] redirecting to", target);
-          window.location.href = target;
+          smoothNavigate(target);
         
       } catch (err) {
         console.error("[SIGNUP] api error:", err);

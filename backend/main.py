@@ -6,6 +6,8 @@ import html
 import json
 import hashlib
 import uuid
+import urllib.error
+import urllib.request
 from datetime import datetime, timedelta
 from typing import Optional, List, Literal
 
@@ -32,6 +34,9 @@ DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///wheretocofi.db")
 SECRET_KEY = os.getenv("SECRET_KEY", "change-me")
 ALGORITHM = os.getenv("ALGORITHM", "HS256")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "60"))
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "").strip()
+OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-5").strip()
+OPENAI_TIMEOUT_SECONDS = int(os.getenv("OPENAI_TIMEOUT_SECONDS", "30"))
 
 BASE_DIR = os.path.dirname(__file__)
 UPLOAD_ROOT = os.path.join(BASE_DIR, "uploads")
@@ -2058,6 +2063,159 @@ def sentiment_analytics(db: Session = Depends(get_db)):
 
 # ============================ AI COFFEE ASSISTANT =============================
 
+def build_ai_cafe_context(db: Session, current_user: Optional[Cafegii]) -> str:
+    cafe_rows = (
+        db.query(
+            Cafenele,
+            func.count(Review.id).label("review_count"),
+            func.avg(Review.rating).label("avg_rating"),
+        )
+        .outerjoin(Review, Review.cafe_id == Cafenele.id)
+        .group_by(Cafenele.id)
+        .order_by(Cafenele.name.asc())
+        .all()
+    )
+
+    cafe_lines = []
+    for cafe, review_count, avg_rating in cafe_rows[:12]:
+        menu = "; ".join(
+            part for part in [
+                (cafe.menu_text or "").strip(),
+                (cafe.products_text or "").strip(),
+            ]
+            if part
+        )
+        cafe_lines.append(
+            "- {name} | city: {city} | area: {area} | address: {address} | "
+            "tags: {tags} | hours: {hours} | rating: {rating}/5 from {count} reviews | "
+            "menu/products: {menu}".format(
+                name=cafe.name,
+                city=cafe.city or "unknown",
+                area=cafe.area or "unknown",
+                address=cafe.address or "unknown",
+                tags=cafe.tags or "none",
+                hours=cafe.hours_text or "unknown",
+                rating=round(float(avg_rating or 0), 2),
+                count=int(review_count or 0),
+                menu=menu[:700] or "unknown",
+            )
+        )
+
+    recent_review_rows = (
+        db.query(Review, Cafenele)
+        .join(Cafenele, Review.cafe_id == Cafenele.id)
+        .order_by(Review.created_at.desc())
+        .limit(10)
+        .all()
+    )
+
+    review_lines = []
+    for review, cafe in recent_review_rows:
+        comment = (review.comment_en or review.comment_ro or review.comment or "").strip()
+        items = (review.purchased_items or "").strip()
+        review_lines.append(
+            f"- {cafe.name}: {review.rating}/5; items: {items or 'unknown'}; "
+            f"sentiment: {review.sentiment_label or 'unknown'}; comment: {comment[:280] or 'none'}"
+        )
+
+    user_context = "User is not logged in."
+    if current_user:
+        user_reviews = (
+            db.query(Review, Cafenele)
+            .join(Cafenele, Review.cafe_id == Cafenele.id)
+            .filter(Review.user_id == current_user.id)
+            .order_by(Review.created_at.desc())
+            .limit(8)
+            .all()
+        )
+        favorite_counts = {}
+        for review, _ in user_reviews:
+            for item in split_items(review.purchased_items):
+                normalized = normalize_drink_name(item)
+                if normalized:
+                    favorite_counts[normalized] = favorite_counts.get(normalized, 0) + 1
+        favorite_drinks = ", ".join(
+            name for name, _ in sorted(favorite_counts.items(), key=lambda x: (-x[1], x[0]))[:5]
+        )
+        user_context = (
+            f"Logged-in user: {current_user.prenume} {current_user.nume}. "
+            f"Likely favorite drinks from recent reviews: {favorite_drinks or 'not enough data'}."
+        )
+
+    return (
+        "WhereToCofi app data snapshot:\n\n"
+        "Cafes:\n" + ("\n".join(cafe_lines) or "No cafes saved yet.") + "\n\n"
+        "Recent public reviews:\n" + ("\n".join(review_lines) or "No reviews saved yet.") + "\n\n"
+        "User context:\n" + user_context
+    )
+
+
+def extract_openai_text(response_payload: dict) -> str:
+    if response_payload.get("output_text"):
+        return str(response_payload["output_text"]).strip()
+
+    chunks = []
+    for item in response_payload.get("output", []):
+        for content in item.get("content", []):
+            if content.get("type") in {"output_text", "text"} and content.get("text"):
+                chunks.append(str(content["text"]))
+
+    return "\n".join(chunks).strip()
+
+
+def ask_openai_coffee_assistant(question: str, context: str) -> str:
+    if not OPENAI_API_KEY:
+        raise HTTPException(
+            status_code=503,
+            detail="AI assistant is not configured. Set OPENAI_API_KEY in backend/.env.",
+        )
+
+    body = {
+        "model": OPENAI_MODEL,
+        "store": False,
+        "input": [
+            {
+                "role": "developer",
+                "content": (
+                    "You are the WhereToCofi virtual coffee assistant. "
+                    "Answer in the same language as the user. Be concise, warm, and practical. "
+                    "Use the app data snapshot for cafe recommendations, ratings, menus, and user preferences. "
+                    "If the data is not enough, say that clearly and offer a useful general coffee answer. "
+                    "Do not invent cafes, ratings, menu items, reviews, or user history."
+                ),
+            },
+            {"role": "user", "content": context},
+            {"role": "user", "content": question},
+        ],
+    }
+
+    request = urllib.request.Request(
+        "https://api.openai.com/v1/responses",
+        data=json.dumps(body).encode("utf-8"),
+        headers={
+            "Authorization": f"Bearer {OPENAI_API_KEY}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+
+    try:
+        with urllib.request.urlopen(request, timeout=OPENAI_TIMEOUT_SECONDS) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        detail = e.read().decode("utf-8", errors="replace")
+        logger.error("OpenAI API HTTP error: %s", detail)
+        raise HTTPException(status_code=502, detail="OpenAI API returned an error.")
+    except Exception as e:
+        logger.exception("OpenAI API request failed: %s", e)
+        raise HTTPException(status_code=502, detail="AI assistant could not reach OpenAI API.")
+
+    answer = extract_openai_text(payload)
+    if not answer:
+        raise HTTPException(status_code=502, detail="OpenAI API returned an empty answer.")
+    return answer
+
+
 @app.post("/ai/ask", response_model=AiAskOut)
 def ai_ask(
     payload: AiAskIn,
@@ -2065,6 +2223,10 @@ def ai_ask(
     db: Session = Depends(get_db),
 ):
     question = payload.question.strip()
+    context = build_ai_cafe_context(db, current_user)
+    answer = ask_openai_coffee_assistant(question, context)
+    return AiAskOut(answer=answer, source=f"OpenAI Responses API ({OPENAI_MODEL}) + database")
+
     q = normalize_text_basic(question)
     answer_in_ro = is_romanian_question(question)
 
