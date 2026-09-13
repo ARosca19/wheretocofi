@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WhereToCofi · About</title>
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <script defer src="config/config.js"></script>
+  <script defer src="js/storage.js"></script>
+  <script defer src="js/toast.js"></script>
+  <script defer src="js/api.js"></script>
+
+  <script defer src="js/ui.auth.js"></script>
+  <script defer src="js/ui.menu.js"></script>
+
+  <script defer src="js/admin.dialog.js"></script>
+  <script defer src="js/admin.users.js"></script>
+  <script defer src="js/admin.cafes.js"></script>
+
+  <script defer src="js/main.js"></script>
+  <script defer src="about.js"></script>
+</head>
+
+<body class="js-loading">
+  <header class="topbar" role="banner">
+    <div class="topbar-left">
+      <a href="frame1.html" class="brand-inline" aria-label="WhereToCofi Home">
+        <svg class="coffee-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M17 8H5a1 1 0 0 0-1 1v2a5 5 0 0 0 5 5h4a5 5 0 0 0 5-5V9a1 1 0 0 0-1-1Z" />
+          <path d="M17 10h2a2 2 0 1 1 0 4h-2M7 18h10M9 6c0-1 .8-1.2.8-2S9 2 9 2m3 4c0-1 .8-1.2.8-2S12 2 12 2" />
+        </svg>
+        <span class="brand-small">↩ Home</span>
+      </a>
+
+      <div class="auth-inline">
+        <a href="#" id="btnMyCafecitos" class="chip" style="display:none;">My Cafecitos☕</a>
+
+        <div class="admin-panel-wrapper">
+          <button id="btnAdminPanel" class="chip" style="display:none;">Admin panel ▾</button>
+          <div id="adminPanelMenu" class="admin-panel-menu">
+            <button type="button" class="admin-panel-item" data-action="admin-create">Create users</button>
+            <button type="button" class="admin-panel-item" data-action="admin-edit">Edit users</button>
+            <button type="button" class="admin-panel-item" data-action="admin-delete">Delete users</button>
+
+            <div class="admin-panel-separator"></div>
+
+            <button type="button" class="admin-panel-item" data-action="admin-create-cafe">Create cafes</button>
+            <button type="button" class="admin-panel-item" data-action="admin-edit-cafe">Edit cafes</button>
+            <button type="button" class="admin-panel-item" data-action="admin-delete-cafe">Delete cafes</button>
+          </div>
+        </div>
+
+        <a href="#" id="btnLogin" class="chip">Log In</a>
+        <a href="#" id="btnSignup" class="chip">Sign Up</a>
+      </div>
+    </div>
+
+    <div class="topbar-center">
+      <span id="helloUser" class="hello-center"></span>
+    </div>
+
+    <nav class="topbar-right desktop-nav" id="desktopNav" aria-label="Main">
+      <a href="reviews.html" class="chip">Reviews☕</a>
+      <a href="about.html" class="chip is-active">About☕☕</a>
+      <a href="contact.html" class="chip">Contact☕☕☕</a>
+    </nav>
+
+    <button class="menu-toggle dots-vertical" id="menuToggle" aria-label="Menu" aria-expanded="false" aria-controls="mnav">
+      <span></span>
+    </button>
+    <nav class="mobile-menu" role="menu" id="mnav"></nav>
+  </header>
+
+  <main class="app about-page">
+    <section class="page-section">
+      <h1 class="page-title">About WhereToCofi</h1>
+      <p class="page-subtitle">The story of a great coffee, enjoyed at just the right moment.</p>
+
+      <div class="about-cards">
+        <details class="about-slide about-slide--hero">
+          <summary class="about-slide__head">
+            <span class="about-slide__icon">☕</span>
+            <span class="about-slide__title" data-about-translate>How did it all begin?</span>
+            <span class="about-slide__chev">▾</span>
+          </summary>
+          <div class="about-slide__body">
+            <div class="about-slide__content">
+              <p data-about-translate>
+                In 2020, together with my father, I discovered a small coffee island in IOR Park, a coffee stand called Ceaicoffski. It was not just a place where you buy coffee to go, but a place where you are greeted with a smile, asked about your day, and made to feel that people truly put soul into what they do.
+              </p>
+              <p data-about-translate>
+                Since then, we have been going there for about five years. I noticed how the taste of coffee can change depending on the weather or temperature, how constant the quality remains, and how many people gather in front of a simple coffee stand, whether it rains or snows.
+              </p>
+              <p data-about-translate>
+                This is where the question started: how could I find places like this wherever I go?
+              </p>
+            </div>
+          </div>
+        </details>
+
+        <details class="about-slide">
+          <summary class="about-slide__head">
+            <span class="about-slide__icon">🔎</span>
+            <span class="about-slide__title" data-about-translate>What problem does WhereToCofi solve?</span>
+            <span class="about-slide__chev">▾</span>
+          </summary>
+          <div class="about-slide__body">
+            <div class="about-slide__content">
+              <p data-about-translate>
+                I realized that I really enjoy discovering new cafés, whether in Bucharest, around the country, or abroad. However, there was no application dedicated only to specialty cafés and good places for working or studying.
+              </p>
+              <p data-about-translate>Until now, the typical sources were:</p>
+              <ul>
+                <li data-about-translate>Instagram – beautiful photos, but difficult to filter by real needs;</li>
+                <li data-about-translate>Tripadvisor – general information, not focused on cafés and atmosphere;</li>
+                <li data-about-translate>TikTok – fast content, but difficult to organize and find again later.</li>
+              </ul>
+              <p data-about-translate>
+                When I wanted to go somewhere to study or work, I usually chose cafés near my university or places I randomly discovered while walking. I saved notes on my phone like “come back here”, but the list became chaotic, without clear details about noise level, coffee quality, menu, or whether the place was suitable for group projects.
+              </p>
+            </div>
+          </div>
+        </details>
+
+        <details class="about-slide">
+          <summary class="about-slide__head">
+            <span class="about-slide__icon">📍</span>
+            <span class="about-slide__title" data-about-translate>What is WhereToCofi?</span>
+            <span class="about-slide__chev">▾</span>
+          </summary>
+          <div class="about-slide__body">
+            <div class="about-slide__content">
+              <p data-about-translate>
+                WhereToCofi is a project born from a real need: a place where you can find cafés that truly fit you, not just what is nearby or what has nice photos.
+              </p>
+              <p data-about-translate>The purpose of the application is to help you search and filter cafés based on:</p>
+              <ul>
+                <li data-about-translate>the vibe of the place – cozy, vibrant, quiet, suitable for studying, and more;</li>
+                <li data-about-translate>facilities – Wi-Fi, power outlets, laptop-friendly space, or group seating;</li>
+                <li data-about-translate>type of coffee – origin, roastery, beans, espresso-based drinks, and more;</li>
+                <li data-about-translate>menu – food options, plant-based alternatives, desserts, and other products;</li>
+                <li data-about-translate>real reviews – from people who have already been there and shared their honest experience.</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <details class="about-slide">
+          <summary class="about-slide__head">
+            <span class="about-slide__icon">👤</span>
+            <span class="about-slide__title" data-about-translate>User profile</span>
+            <span class="about-slide__chev">▾</span>
+          </summary>
+          <div class="about-slide__body">
+            <div class="about-slide__content">
+              <p data-about-translate>
+                Authenticated users have access to a personal profile where they can see their activity inside the application. The profile turns reviews into a clearer image of personal preferences.
+              </p>
+              <ul>
+                <li data-about-translate>account information – name, email, and role;</li>
+                <li data-about-translate>personal statistics – number of reviews, cafés visited, average rating, and favorites;</li>
+                <li data-about-translate>review sentiment – positive, neutral, or negative;</li>
+                <li data-about-translate>favorite purchased products – a top list based on submitted reviews;</li>
+                <li data-about-translate>activity history – reviews can be searched and sorted.</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <details class="about-slide">
+          <summary class="about-slide__head">
+            <span class="about-slide__icon">🤖</span>
+            <span class="about-slide__title" data-about-translate>AI assistant</span>
+            <span class="about-slide__chev">▾</span>
+          </summary>
+          <div class="about-slide__body">
+            <div class="about-slide__content">
+              <p data-about-translate>
+                WhereToCofi includes an AI assistant that helps users receive faster and more relevant recommendations. It uses information about cafés, drinks, preferences, and coffee knowledge.
+              </p>
+              <ul>
+                <li data-about-translate>it can recommend cafés depending on the need: work, studying, relaxation, or specialty coffee;</li>
+                <li data-about-translate>it can explain differences between drinks such as espresso, cappuccino, flat white, or V60;</li>
+                <li data-about-translate>it can suggest drinks based on taste, intensity, weather, or time of day;</li>
+                <li data-about-translate>it understands natural questions, not only fixed filters.</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <details class="about-slide">
+          <summary class="about-slide__head">
+            <span class="about-slide__icon">🧠</span>
+            <span class="about-slide__title" data-about-translate>Smart review analysis</span>
+            <span class="about-slide__chev">▾</span>
+          </summary>
+          <div class="about-slide__body">
+            <div class="about-slide__content">
+              <p data-about-translate>
+                The application does not only display reviews. WhereToCofi uses text processing to extract useful information from user feedback.
+              </p>
+              <ul>
+                <li data-about-translate>language normalization – reviews can be translated and stored in Romanian;</li>
+                <li data-about-translate>sentiment analysis – reviews are classified as positive, neutral, or negative;</li>
+                <li data-about-translate>sentiment score – calculated based on the text of the review;</li>
+                <li data-about-translate>top ordered products – extracted from the products entered by users;</li>
+                <li data-about-translate>top cafés – calculated using ratings and the number of reviews.</li>
+              </ul>
+              <p data-about-translate>
+                This gives the application an NLP and ML-assisted component, because the text written by users is automatically analyzed in order to generate useful conclusions.
+              </p>
+            </div>
+          </div>
+        </details>
+
+        <details class="about-slide">
+          <summary class="about-slide__head">
+            <span class="about-slide__icon">🧾</span>
+            <span class="about-slide__title" data-about-translate>More credible reviews</span>
+            <span class="about-slide__chev">▾</span>
+          </summary>
+          <div class="about-slide__body">
+            <div class="about-slide__content">
+              <p data-about-translate>
+                To make reviews more relevant, users must add visit-related information, such as the receipt number and the products they purchased.
+              </p>
+              <ul>
+                <li data-about-translate>a review is connected to a specific café;</li>
+                <li data-about-translate>purchased products are saved for analysis;</li>
+                <li data-about-translate>the same receipt cannot be used more than once for the same café;</li>
+                <li data-about-translate>reviews become more useful for other users.</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <details class="about-slide">
+          <summary class="about-slide__head">
+            <span class="about-slide__icon">⚙️</span>
+            <span class="about-slide__title" data-about-translate>Main features</span>
+            <span class="about-slide__chev">▾</span>
+          </summary>
+          <div class="about-slide__body">
+            <div class="about-slide__content">
+              <ul>
+                <li data-about-translate>user account, registration, login, and profile management;</li>
+                <li data-about-translate>personalized profile with statistics and activity history;</li>
+                <li data-about-translate>list of cafés with details, descriptions, menu, program, and location;</li>
+                <li data-about-translate>review and rating system;</li>
+                <li data-about-translate>receipt-based review verification;</li>
+                <li data-about-translate>My Cafecitos, a list of favorite cafés;</li>
+                <li data-about-translate>top-rated cafés and top ordered drinks;</li>
+                <li data-about-translate>sentiment analysis for reviews;</li>
+                <li data-about-translate>translation and language normalization for reviews;</li>
+                <li data-about-translate>AI assistant for recommendations and coffee information;</li>
+                <li data-about-translate>admin panel for managing users and cafés.</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <details class="about-slide">
+          <summary class="about-slide__head">
+            <span class="about-slide__icon">👥</span>
+            <span class="about-slide__title" data-about-translate>Who can use WhereToCofi?</span>
+            <span class="about-slide__chev">▾</span>
+          </summary>
+          <div class="about-slide__body">
+            <div class="about-slide__content">
+              <ul>
+                <li data-about-translate>students looking for a quiet place to study or write projects;</li>
+                <li data-about-translate>people who work remotely and want alternatives to the office;</li>
+                <li data-about-translate>anyone who loves good coffee and wants to discover new places;</li>
+                <li data-about-translate>cafés that want to become more visible to the right audience.</li>
+              </ul>
+              <p data-about-translate>
+                If you are looking for a place with soul, where you can drink good coffee, work, or simply enjoy a conversation, WhereToCofi aims to help you find it more easily.
+              </p>
+            </div>
+          </div>
+        </details>
+
+        <details class="about-slide about-slide--thanks">
+          <summary class="about-slide__head">
+            <span class="about-slide__icon">💛</span>
+            <span class="about-slide__title" data-about-translate>Thank you and enjoy your coffee!</span>
+            <span class="about-slide__chev">▾</span>
+          </summary>
+          <div class="about-slide__body">
+            <div class="about-slide__content">
+              <p data-about-translate>
+                Thank you for using WhereToCofi and supporting the idea behind the application. Every review or piece of feedback helps the community grow and makes the next great coffee easier for someone to find.
+              </p>
+            </div>
+          </div>
+        </details>
+        <div class="about-actions-bottom">
+          <button id="aboutTranslateBtn" class="chip about-translate-btn">
+            Translate to Romanian
+          </button>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <a href="index.html" id="btnLogout" class="chip logout-desktop" style="display:none;">Log Out ⏻</a>
+
+</body>
+
+</html>

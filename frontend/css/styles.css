@@ -1,0 +1,4519 @@
+/* ============ PALETĂ & GLOBAL ============ */
+[hidden] {
+  display: none !important;
+}
+
+:root{
+  --bg:#fff;
+  --paper:#fafafa;
+  --green:#d9f5e5;
+  --latte:#fcf3e7;
+  --cappuccino:#d2b48c;
+  --ink:#3a2e1e;
+  --shadow:0 12px 28px rgba(245, 136, 136, 0.08);
+  --radius-xl:28px;
+  --radius-lg:16px;
+  --radius-md:12px;
+  --review-accent: #5b3702;
+  --maxw:1200px;
+}
+
+
+
+*{ box-sizing:border-box; }
+
+html,body{ height:100%; }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+
+.app{
+  margin-inline:auto;
+  padding:16px;
+  max-width:var(--maxw);
+}
+
+/* ============ START PAGE (frame0) ============ */
+
+.start-page{
+  min-height:100vh;
+  margin:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fffaf5;
+  color:#3c2f2f;
+  font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.start-container{
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:clamp(14px,2vw,24px);
+  padding:clamp(12px,2vw,20px);
+}
+
+.cofi-image{
+  width:clamp(220px,30vw,380px);
+  height:clamp(220px,30vw,380px);
+  border-radius:50%;
+  object-fit:cover;
+  object-position:center;
+  border:clamp(5px,0.6vw,8px) solid #fff;
+  box-shadow:0 16px 32px rgba(0,0,0,.18);
+}
+
+.start-title{
+  margin:10px 0 0;
+  font-weight:900;
+  line-height:1.1;
+  font-size:clamp(28px,4.2vw,52px);
+}
+
+.subtitle{
+  margin:-4px 0 4px;
+  color:#8b6d5c;
+  font-weight:600;
+  opacity:.9;
+  font-size:clamp(14px,1.8vw,20px);
+}
+
+.start-button{
+  display:inline-block;
+  background:#d6b08b;
+  color:#fff;
+  text-decoration:none;
+  padding:clamp(10px,1.5vw,14px) clamp(22px,2.5vw,28px);
+  border-radius:999px;
+  font-weight:500;
+  font-size:clamp(14px,1.6vw,18px);
+  letter-spacing:.2px;
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
+  transition:all .25s ease;
+}
+
+.start-button:hover{
+  background:#b58a6a;
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(0,0,0,.2);
+}
+
+@media (max-width:420px){
+  .cofi-image{ width:220px; height:220px; }
+  .start-title{ font-size:28px; }
+  .subtitle{ font-size:14px; }
+  .start-button{ font-size:16px; padding:12px 26px; }
+}
+
+/* ============ TOPBAR + BRAND ============ */
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:12px;
+  padding:14px 22px;
+  background:#fffaf5;
+  border-bottom:1px solid #ead5c3;
+}
+
+.topbar-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.brand-inline{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  text-decoration:none;
+}
+
+.coffee-icon{
+  width:35px;
+  height:28px;
+  fill:#b58a6a;
+  stroke:#8b6d5c;
+  stroke-width:.6;
+  transform:translateY(6px);
+}
+
+.brand-small{
+  font-weight:900;
+  color:#3c2f2f;
+  font-size:clamp(18px,1.8vw,22px);
+  letter-spacing:.2px;
+}
+
+/* stânga: My Cafecitos + Admin panel + login/signup */
+.auth-inline{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+/* centru: Hello, user */
+.topbar-center{
+  justify-self:center;
+  text-align:center;
+  min-height:32px;
+}
+
+
+
+/* dreapta: Reviews / About / Contact */
+.topbar-right{
+  justify-self:end;
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+/* „chip” general */
+.chip{
+  display:inline-block;
+  padding:6px 14px;
+  border:2px solid #d6b08b;
+  border-radius:999px;
+  color:#8b6d5c;
+  text-decoration:none;
+  font-weight:600;
+  font-size:14px;
+  background:#fff;
+  box-shadow:0 4px 10px rgba(0,0,0,.05);
+  cursor:pointer;
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    background .18s ease,
+    color .18s ease;
+}
+
+.chip:hover{
+  transform:translateY(-1px);
+  background:#fffaf5;
+  box-shadow:0 10px 24px rgba(0,0,0,.14);
+  color:#6f5647;
+}
+
+/* ============ MENIU MOBIL (⋮) ============ */
+
+.menu-toggle{ display:none; }
+
+.dots-vertical{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  width:20px;
+  height:20px;
+  border:none;
+  background:transparent;
+  cursor:pointer;
+  padding:0;
+}
+
+.dots-vertical span,
+.dots-vertical::before,
+.dots-vertical::after{
+  content:"";
+  display:block;
+  width:4px;
+  height:4px;
+  background-color:#3c2f2f;
+  border-radius:50%;
+  margin:0 auto;
+}
+
+.mobile-menu{
+  display:none;
+  position:absolute;
+  right:12px;
+  top:calc(100% + 8px);
+  z-index:1100;
+  background:#fffaf5;
+  border-radius:14px;
+  padding:10px 12px;
+  box-shadow:0 16px 40px rgba(0,0,0,.15);
+  min-width:170px;
+}
+
+.mobile-menu.is-open{ display:block; }
+
+.mobile-menu .mitem{
+  display:block;
+  padding:10px 8px;
+  text-decoration:none;
+  color:#3c2f2f;
+  font-weight:600;
+  border-radius:10px;
+  margin-top:2px;
+}
+
+.mobile-menu .mitem:hover{
+  background:#f6e9e3;
+}
+
+.mobile-menu hr{
+  border:none;
+  height:1px;
+  background:#ead5c3;
+  margin:6px 0 8px;
+}
+
+/* ============ RESPONSIVE TOPBAR ============ */
+
+@media (max-width:820px){
+  .auth-inline{ display:none; }
+  .desktop-nav{ display:none; }
+  #menuToggle{ display:flex; justify-self:end; }
+
+  .topbar{
+    grid-template-columns:auto auto 1fr;
+    align-items:center;
+    padding:12px 14px 10px;
+    gap:6px;
+  }
+
+  .brand-small{
+    font-size:15px;
+    font-weight:900;
+    line-height:1;
+  }
+
+  .coffee-icon{
+    width:22px;
+    height:20px;
+    transform:translateY(3px);
+  }
+
+  .topbar-center{
+    justify-self:start;
+    text-align:left;
+    margin-left:10px;
+    display:flex;
+    align-items:center;
+  }
+
+  .hello-center{
+    font-size:18px;
+    font-weight:800;
+    color:#b58a6a;
+    text-shadow:0 1px 2px rgba(0,0,0,.1);
+    line-height:2;
+  }
+
+  #menuToggle{
+    align-self:center;
+    justify-self:end;
+    margin-bottom:0;
+  }
+}
+
+@media (min-width:821px){
+  #menuToggle{ display:none; }
+
+  .brand{
+    font-size:clamp(22px,2vw,32px);
+    margin-top:12px;
+    margin-bottom:4px;
+  }
+
+  .hello-center{
+    color:#b58a6a;
+    font-size:clamp(18px,1.3vw,23px);
+    font-weight:700;
+    text-shadow:0 1px 2px rgba(0,0,0,.08);
+  }
+
+  .topbar{ padding:10px 20px; }
+
+  .auth-inline{
+    flex-wrap:nowrap;
+    max-width:420px;
+  }
+}
+
+/* ============ HEADER TEXT & SEARCH (frame1) ============ */
+
+.brand{
+  text-align:center;
+  margin:28px 0 8px;
+  font-weight:900;
+  font-size:clamp(24px,2.6vw,38px);
+  color:#3c2f2f;
+  letter-spacing:.4px;
+  text-shadow:0 1px 6px rgba(0,0,0,.03);
+}
+
+.search-bar{
+  display:flex;
+  justify-content:center;
+  margin:6px 0 26px;
+}
+
+.search-input{
+  width:min(620px,88%);
+  padding:10px 16px;
+  border:2px solid #d6b08b;
+  border-radius:999px;
+  box-shadow:0 5px 12px rgba(0,0,0,.07);
+  outline:none;
+  text-align:center;
+  font-size:clamp(13px,1.4vw,17px);
+  color:#3c2f2f;
+  background:#fff;
+  transition:.2s;
+}
+
+.search-input::placeholder{
+  color:#9c7e6a;
+  opacity:.85;
+  font-style:italic;
+}
+
+.search-input:focus{
+  box-shadow:0 10px 22px rgba(214,176,139,.25);
+  transform:scale(1.01);
+}
+
+/* ============ HERO SLIDER (frame1) ============ */
+
+.hero{
+  position:relative;
+  border-radius:var(--radius-xl);
+  overflow:hidden;
+  height:clamp(220px,28vw,550px);
+  margin:12px auto 28px;
+  box-shadow:var(--shadow);
+  background:#f6e9e3;
+}
+
+.slider{ position:relative; height:100%; }
+.slides{ position:relative; height:100%; }
+
+.slide{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition:opacity .5s ease;
+}
+
+.slide.is-active{ opacity:1; }
+
+.slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0 0;
+  height:35%;
+  background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.25) 90%);
+  pointer-events:none;
+}
+
+.nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:rgba(0,0,0,.35);
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  font-size:22px;
+  line-height:1;
+  transition:opacity .2s ease, background .2s ease;
+}
+
+.nav:hover{ background:rgba(0,0,0,.5); }
+.nav.prev{ left:10px; }
+.nav.next{ right:10px; }
+
+.dots{
+  position:absolute;
+  left:50%;
+  bottom:12px;
+  transform:translateX(-50%);
+  display:flex;
+  gap:8px;
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+.dots button{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  border:0;
+  cursor:pointer;
+  background:rgba(255,255,255,.55);
+}
+
+.dots button[aria-current="true"]{
+  background:#fff;
+  box-shadow:0 0 0 2px rgba(0,0,0,.12) inset;
+}
+
+/* ============ CARDS (lista cafenele) ============ */
+
+.cards{
+  display:grid;
+  gap:16px;
+  grid-template-columns:1fr;
+}
+
+@media (min-width:768px){
+  .cards{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (min-width:1100px){
+  .cards{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
+
+.card{
+  background:var(--latte);
+  color:var(--ink);
+  border-radius:var(--radius-lg);
+  padding:16px 18px;
+  box-shadow:var(--shadow);
+  transition:transform .18s ease, box-shadow .18s ease;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  text-decoration:none;
+}
+
+.cards .card:nth-child(2n){
+  background:var(--cappuccino);
+  color:#fff;
+}
+
+
+
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 16px 40px rgba(0,0,0,.12);
+}
+
+.card .title{
+  font-weight:800;
+  font-size:clamp(15px,1.8vw,18px);
+}
+
+.card .meta{
+  opacity:.9;
+  font-size:clamp(13px,1.6vw,14px);
+}
+
+.card .row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.card .more{
+  font-weight:700;
+  font-size:13px;
+  opacity:.85;
+}
+
+.card .arrow{
+  font-size:16px;
+  opacity:.7;
+}
+
+/* Telefon – carduri într-o „aplicație” cu fundal roz */
+@media (max-width:600px){
+  body{ background:var(--bg); }
+  .app{
+    max-width:430px;
+    background:var(--bg);
+    box-shadow:none;
+    padding:16px 12px 28px;
+  }
+}
+
+/* ============ AUTH PAGES (login & signup) ============ */
+
+.auth-form{
+  max-width:440px;
+  width:100%;
+}
+
+.auth-form-body{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.auth-title{
+  margin:0 0 8px;
+  font-size:20px;
+  font-weight:800;
+  color:#3c2f2f;
+}
+
+.auth-field{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  font-size:14px;
+  color:#6f5647;
+}
+
+.auth-field span{
+  font-weight:600;
+}
+
+.auth-field input{
+  width:100%;
+  padding:8px 10px;
+  border-radius:10px;
+  border:1px solid #d6b08b;
+  font-size:14px;
+  outline:none;
+  background:#fff;
+}
+
+.auth-field input:focus{
+  box-shadow:0 0 0 2px rgba(214,176,139,.35);
+}
+
+.auth-name-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+@media (max-width:480px){
+  .auth-name-row{
+    grid-template-columns:1fr;
+  }
+}
+
+.auth-submit{
+  width:100%;
+  justify-content:center;
+  text-align:center;
+  margin-top:6px;
+}
+
+.auth-msg{
+  min-height:18px;
+  font-size:13px;
+  margin:4px 0 0;
+}
+
+.auth-msg.error{ color:#b00020; }
+.auth-msg.ok{ color:green; }
+
+.auth-switch a{
+  color:#b58a6a;
+  font-weight:600;
+  text-decoration:none;
+}
+
+.auth-switch a:hover{
+  text-decoration:underline;
+}
+
+/* ============ CAFE DETAIL PAGE (cafe.html) ============ */
+
+.cafe-page{
+  margin-top:12px;
+}
+
+.cafe-header{
+  display:flex;
+  justify-content:center;
+  text-align:center;
+  margin-top:10px;
+  margin-bottom:8px;
+}
+
+.cafe-title-wrap.center{
+  text-align:center;
+}
+
+.cafe-title{
+  margin:0;
+  font-size:clamp(24px,2.4vw,32px);
+  font-weight:900;
+  color:#3c2f2f;
+}
+
+.cafe-subtitle{
+  margin-top:4px;
+  font-size:15px;
+  color:#8b6d5c;
+}
+
+.cafe-hero-card{
+  border-radius:var(--radius-xl);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  margin-bottom:18px;
+  background:#f6e9e3;
+}
+
+.cafe-hero-img{
+  width:100%;
+  height:clamp(200px,26vw,420px);
+  object-fit:cover;
+  display:block;
+}
+
+.cafe-sections{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.cafe-section{
+  background:var(--latte);
+  border-radius:var(--radius-lg);
+  padding:14px 16px 16px;
+  box-shadow:var(--shadow);
+  scroll-margin-top: 90px;
+}
+
+.cafe-section h2{
+  margin:0 0 6px;
+  font-size:16px;
+  font-weight:800;
+  color:#3c2f2f;
+}
+
+.cafe-section p{
+  margin:0;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.cafe-meta{
+  margin-top:2px;
+  font-size:13px;
+  color:#6f5647;
+}
+
+.cafe-review-section{
+  background:var(--green);
+}
+
+.cafe-stars{
+  display:flex;
+  gap:6px;
+  margin:6px 0 8px;
+}
+
+.star-btn{
+  border:none;
+  background:transparent;
+  font-size:20px;
+  cursor:pointer;
+  padding:2px 3px;
+  line-height:1;
+  color:#141402;
+  transition:transform .2s ease, text-shadow .1s ease, color .25s ease;
+}
+
+.star-btn:hover{
+  transform:translateY(-1px);
+  text-shadow:0 2px 4px rgba(0,0,0,.2);
+}
+
+.star-btn.is-active{
+  color:#ee830a;
+  text-shadow:0 1px 3px rgba(134,59,59,.25);
+}
+
+.cafe-textarea{
+  width:100%;
+  min-height:80px;
+  resize:vertical;
+  margin-top:4px;
+  border-radius:10px;
+  border:1px solid #d6b08b;
+  padding:8px 10px;
+  font-size:14px;
+  font-family:inherit;
+  outline:none;
+  background:#fff;
+}
+
+.cafe-textarea:focus{
+  box-shadow:0 0 0 2px rgba(214,176,139,.35);
+}
+
+.cafe-submit{
+  margin-top:8px;
+}
+
+.cafe-review-hint{
+  margin-top:4px;
+  font-size:12px;
+  color:#6f5647;
+}
+
+@media (max-width:600px){
+  .cafe-header{
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+  }
+
+  .cafe-title-wrap{
+    width:100%;
+    text-align:center;
+  }
+
+  .cafe-title{
+    font-size:20px;
+    text-align:center;
+  }
+
+  .cafe-subtitle{
+    text-align:center;
+  }
+}
+
+/* mini-nav pe secțiuni */
+
+.cafe-nav{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin:10px 0 20px;
+  flex-wrap:wrap;
+}
+
+.cafe-nav-btn{
+  padding:6px 14px;
+  border-radius:999px;
+  border:2px solid #d6b08b;
+  background:#fff;
+  color:#6f5647;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.cafe-nav-btn:hover{
+  background:#fff7f1;
+  box-shadow:0 4px 10px rgba(0,0,0,.07);
+  transform:translateY(-1px);
+}
+
+.cafe-nav-btn.is-active{
+  background:#fff1e3;
+  border-color:#c99563;
+}
+
+@media (max-width:600px){
+  .cafe-nav{
+    gap:6px;
+    margin:8px 0 18px;
+  }
+  .cafe-nav-btn{
+    padding:6px 12px;
+    font-size:12px;
+  }
+}
+
+.cafe-section.is-highlight{
+  box-shadow:0 0 0 2px rgba(170,104,38,.8), var(--shadow);
+  transform:translateY(-1px);
+  transition:box-shadow .25s ease, transform .25s ease, background .25s ease;
+}
+
+
+/* Not Logged in Review Section */
+.login-required {
+  text-align: center;
+}
+
+.login-required h3 {
+  margin-bottom: 6px;
+}
+
+.login-required .muted {
+  opacity: 0.75;
+  margin-bottom: 14px;
+}
+
+
+/* ============ ADMIN PANEL (buton din stânga) ============ */
+
+.admin-panel-wrapper{
+  position:relative;
+  display:inline-block;
+}
+
+.admin-panel-menu{
+  position:absolute;
+  top:110%;
+  left:0;
+  min-width:190px;
+  background:#fff7f2;
+  border-radius:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,.12);
+  padding:6px 0;
+  display:none;
+  z-index:9999;
+}
+
+.admin-panel-menu.is-open{
+  display:block;
+}
+
+.admin-panel-item{
+  display:block;
+  width:100%;
+  padding:6px 14px;
+  text-align:left;
+  border:none;
+  background:transparent;
+  cursor:pointer;
+  font:inherit;
+  color:#5a3f32;
+}
+
+.admin-panel-item:hover{
+  background:rgba(214,176,139,.14);
+}
+
+.admin-panel-separator{
+  margin:6px 0;
+  border-top:1px solid rgba(214,176,139,.4);
+}
+
+/* ============ ADMIN DIALOG (create/edit/delete user) ============ */
+
+.admin-dialog{
+  background:#fffaf5;
+  border:1px solid #ead5c3;
+  border-radius:16px;
+  box-shadow:0 20px 50px rgba(0,0,0,.18);
+  padding:16px;
+  width:min(420px,92%);
+}
+
+@media (max-width:480px){
+  .admin-dialog{
+    border-radius:12px;
+    padding:12px;
+    width:90%;
+  }
+}
+
+/* ============ LOGOUT BUTON PLUTITOR (desktop) ============ */
+
+.logout-desktop{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  z-index:950;
+}
+
+@media (max-width:820px){
+  .logout-desktop{
+    display:none !important;
+  }
+}
+
+
+/* ============ REVIEWS PAGE (global reviews list) ============ */
+
+.page-section{
+  max-width: 800px;
+  margin: 12px auto 20px;
+  position: relative;
+  padding: 0 12px;
+}
+
+
+.page-title{
+  font-size: clamp(1.9rem, 3vw, 2.3rem);
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: .04em;
+  color: #3c3a2f;
+  text-shadow: 0 1px 4px rgba(0,0,0,.06);
+  margin: 0 0 6px;
+}
+
+.page-subtitle{
+  text-align: center;
+  font-size: .95rem;
+  opacity: .8;
+  margin: 0 0 20px;
+}
+
+.reviews-list{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.review-card{
+  background:#d9f5e5;
+  border-radius:20px;
+  padding:14px 16px;
+  box-shadow:0 8px 30px rgba(0,0,0,.04);
+}
+
+.review-card-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:4px;
+}
+
+
+
+@media (max-width:600px){
+  .review-card{
+    border-radius:16px;
+    padding:12px 12px;
+  }
+}
+
+.reviews-search-wrap{
+  max-width:520px;
+  margin:8px auto 24px;
+}
+
+.reviews-search-input{
+  width:100%;
+  padding:12px 18px;
+  border-radius:999px;
+  border:2px solid #e1c3a2;
+  background:#fffaf7;
+  font-size:.95rem;
+  color:#4a3524;
+  box-shadow:0 8px 24px rgba(0,0,0,.03);
+  outline:none;
+}
+
+.reviews-search-input::placeholder{
+  color:#c0a28a;
+}
+
+@media (max-width:768px){
+  .reviews-search-wrap{
+    margin:6px 20px 18px;
+  }
+}
+
+
+/* highlight temporar ca să o vezi clar după submit */
+.cafe-recs-section.recs-visible {
+  box-shadow: 0 0 0 3px rgba(170, 104, 38, 0.9), 0 10px 40px rgba(0,0,0,0.12);
+}
+
+
+
+/* Ascundem bara de auth până se face prima randare JS */
+body.js-loading .auth-inline,
+body.js-loading #desktopNav,
+body.js-loading #menuToggle {
+  visibility: hidden;
+}
+
+/* ===== RECOMMENDATIONS SECTION ===== */
+
+/* containerul mare */
+.cafe-recs {
+  background: #f9ebc8;          /* gri-beige neutru, fără roz/mov/maro */
+  margin-top: 18px;
+  padding: 18px 18px 20px;      /* mai mic decât înainte */
+  border-radius: 18px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.04);
+}
+
+/* titlul secțiunii */
+.cafe-recs .cafe-section-title {
+  margin: 0 0 6px;
+  padding: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #262626;
+}
+
+/* subtitlu */
+.cafe-recs-subtitle {
+  margin: 0 0 16px;
+  font-size: 0.95rem;
+  color: #4b4b4b;
+  opacity: 0.9;
+}
+
+/* lista de recomandări */
+.recs-list {
+  display: grid;
+  gap: 14px;                   
+  margin-top: 4px;
+}
+
+/* cardurile de recomandări */
+.rec-card {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 14px 14px;   
+  background: #f9fafb;         
+  border-radius: 14px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.03);
+  border: 1px solid rgba(15,23,42,0.06);
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+
+.rec-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+  background: #ffffff;
+}
+
+/* titlul cafenelei */
+.rec-card .title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 2px;
+}
+
+/* zona oraș + tag */
+.rec-card .meta {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* linkul „More info” */
+.rec-card .more {
+  margin-left: auto;
+  font-size: 0.85rem;
+  color: #97a440;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.rec-card .arrow {
+  color: #374151;
+  font-weight: bold;
+  margin-left: 4px;
+}
+
+/* motivul recomandării (dacă există) */
+.rec-reason {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #4b5563;
+  font-style: italic;
+  line-height: 1.3;
+}
+
+/* pe mobil – și mai compact */
+@media (max-width: 600px) {
+  .cafe-recs {
+    margin-top: 14px;
+    padding: 14px 12px 16px;
+    border-radius: 16px;
+  }
+
+  .recs-list {
+    gap: 10px;
+  }
+
+  .rec-card {
+    padding: 10px 12px 12px;
+    border-radius: 12px;
+  }
+
+  .cafe-recs .cafe-section-title {
+    font-size: 1.15rem;
+  }
+}
+
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+/* butonul de favorite (inimă + cafea) */
+.fav-btn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* inima */
+.heart {
+  font-size: 30px;     /* mai mare */
+  line-height: 1;
+  display: inline-block;
+  color: #9c2626ab;
+}
+
+/* iconița 3D */
+.coffee-3d {
+  width: 36px;         /* mai mare */
+  height: 36px;
+  display: inline-block;
+  transition: transform .18s ease, filter .18s ease;
+}
+
+/* stare de "favorite" – se schimbă culoarea + animația se vede clar */
+.fav-btn.is-fav .heart {
+  color: #d42f2f;
+}
+
+.fav-btn.is-fav .coffee-3d {
+  transform: scale(1.15) translateY(-1px);
+  filter: drop-shadow(0 0 4px rgba(255, 140, 0, 0.6));
+}
+
+/* ===========================
+   MY CAFECITOS PAGE — LAYOUT
+   =========================== */
+
+.mycafecitos-page .page-section{
+  max-width: 1120px;
+}
+
+.mycafecitos-head{
+  margin-bottom: 20px;
+}
+
+.mycafecitos-title{
+  font-size: clamp(1.9rem, 3vw, 2.3rem);
+  font-weight: 600;
+  color: #1f2430;
+  text-shadow: none;
+  margin: 0 0 6px;
+  text-align: center;
+  letter-spacing: .04em;
+}
+
+.mycafecitos-subtitle{
+  color: #6f7482;
+  font-size: .95rem;
+  margin: 0 0 20px;
+  text-align: center;
+  opacity: .8;
+}
+
+.fav-section-modern{
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 12px 24px;
+}
+
+.mycafecitos-shell{
+  background: linear-gradient(180deg, #f8fbff 0%, #f4f8ff 100%);
+  border: 1px solid #d9e4f5;
+  border-radius: 28px;
+  padding: 24px 22px 24px;
+  box-shadow: 0 10px 24px rgba(31, 36, 48, 0.05);
+}
+
+.mycafecitos-shell-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  margin-bottom:18px;
+}
+
+.mycafecitos-shell-title{
+  margin:0 0 6px;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color:#1f2430;
+}
+
+.mycafecitos-shell-subtitle{
+  margin:0;
+  color:#6f7482;
+  font-size:.98rem;
+}
+
+.mycafecitos-shell-badge{
+  background:#dff0e3;
+  color:#1b6b3c;
+  border-radius:999px;
+  padding:9px 14px;
+  font-size:.86rem;
+  font-weight:800;
+  white-space:nowrap;
+  box-shadow: 0 4px 10px rgba(83, 184, 115, 0.08);
+}
+
+.mycafecitos-empty{
+  margin: 4px 0 6px;
+  text-align: left;
+  color:#7f8796;
+  background:#f5f8ff;
+  border:1px solid #dbe8ff;
+  border-radius:18px;
+  padding:18px 18px;
+  opacity:1;
+}
+
+.mycafecitos-cards{
+  margin-top: 8px;
+  display:grid;
+  gap:18px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+/* carduri în ton cu My Profile */
+.fav-section-modern .card.fav-card{
+  background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+  color:#1f2430;
+  border:1px solid #dbe4f2;
+  border-radius:22px;
+  padding:18px 18px;
+  box-shadow:0 8px 18px rgba(31, 36, 48, 0.05);
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.fav-section-modern .card.fav-card:nth-child(2n){
+  background:#ffffff;
+  color:#1f2430;
+}
+
+.fav-section-modern .card.fav-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 16px 30px rgba(31, 36, 48, 0.09);
+  border-color:#cfdcf0;
+  background: linear-gradient(180deg, #ffffff 0%, #f2f7ff 100%);
+}
+
+/* titlu */
+.fav-section-modern .fav-card .title{
+  font-size:1.1rem;
+  font-weight:800;
+  color:#1f2430;
+}
+
+/* meta */
+.fav-section-modern .fav-card .meta{
+  color:#6f7482;
+  font-size:.95rem;
+  opacity:1;
+}
+
+/* more info */
+.fav-section-modern .fav-card .more{
+  color:#2f72d6;
+  font-weight:700;
+  opacity:1;
+  background:#eaf2ff;
+  padding:6px 10px;
+  border-radius:999px;
+}
+
+.fav-section-modern .fav-card .arrow{
+  color:#2f72d6;
+  opacity:1;
+}
+
+/* header card */
+.fav-section-modern .card-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:10px;
+}
+
+/* inimă și icon */
+.fav-section-modern .heart{
+  font-size:28px;
+  color:#e25563;
+}
+
+.fav-section-modern .coffee-3d{
+  width:34px;
+  height:34px;
+  filter: drop-shadow(0 2px 4px rgba(47, 114, 214, 0.15));
+}
+
+.fav-section-modern .fav-btn.is-fav .coffee-3d{
+  transform: scale(1.08) translateY(-1px);
+  filter: drop-shadow(0 4px 8px rgba(47, 114, 214, 0.22));
+}
+
+/* card row */
+.fav-section-modern .fav-card .row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+@media (max-width: 820px){
+  .mycafecitos-shell-head{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
+
+@media (max-width: 600px){
+  .fav-section-modern{
+    padding: 0 8px 20px;
+  }
+
+  .mycafecitos-shell{
+    border-radius:22px;
+    padding:18px 14px 18px;
+  }
+
+  .mycafecitos-cards{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+
+  .fav-section-modern .card.fav-card{
+    border-radius:18px;
+    padding:16px 14px;
+  }
+
+  .mycafecitos-title{
+    font-size: 2rem;
+  }
+}
+
+
+
+/* ================= ABOUT SLIDERS ================= */
+.about-cards{
+  max-width: 1240px;
+  margin: 28px auto 0;
+  display: grid;
+  gap: 12px;
+  padding: 0 18px;
+}
+
+.about-slide{
+  background: #bff0ff;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.about-slide:nth-child(even){
+  background: #c9f3ff;
+}
+
+/* clickable header */
+.about-slide__head{
+  list-style: none;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 22px;
+  user-select: none;
+}
+.about-slide__head::-webkit-details-marker{ display:none; }
+
+.about-slide__icon{
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,0.06);
+  font-size: 14px;
+}
+
+.about-slide__title{
+  font-weight: 600;
+  font-size: 1.05rem; /* ↓ mai aerisit */
+  line-height: 1.25;
+}
+
+.about-slide__chev{
+  opacity: .65;
+  transition: transform .22s ease;
+}
+
+/* body */
+.about-slide__body{
+  padding: 0 22px 18px;
+}
+
+/* content reveal (efect “scurgere/scris”) */
+.about-slide__content{
+  max-width: 980px;
+  margin: 0 auto;
+
+  /* masca stânga → dreapta */
+  clip-path: inset(0 100% 0 0);
+
+  /* “scris în mișcare” */
+  opacity: 0;
+  transform: translateX(-16px);
+  filter: blur(0.25px);
+
+  transition:
+    clip-path .48s cubic-bezier(.22,.61,.36,1),
+    opacity .26s ease,
+    transform .48s cubic-bezier(.22,.61,.36,1),
+    filter .26s ease;
+
+  will-change: clip-path, opacity, transform;
+}
+
+.about-slide[open] .about-slide__chev{
+  transform: rotate(180deg);
+}
+
+.about-slide[open] .about-slide__content{
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+  transform: translateX(0);
+  filter: blur(0);
+}
+
+/* text */
+.about-slide__content p{ margin: 8px 0; line-height: 1.55; }
+.about-slide__content ul{ margin: 8px 0 0 1.1rem; padding: 0; }
+.about-slide__content li{ margin: 4px 0; }
+
+/* hero */
+.about-slide--hero{
+  background: linear-gradient(135deg, #bff0ff, #d9f7ff);
+  border-left: 6px solid #7cc7d6;
+}
+
+/* thanks */
+.about-slide--thanks{
+  background: linear-gradient(135deg, #fff6ec, #ffe9d2);
+  border: 2px solid rgba(226,176,122,0.55);
+}
+
+/* desktop list grid */
+@media (min-width: 900px){
+  .about-slide__content ul{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px 22px;
+  }
+}
+
+/* mobile */
+@media (max-width: 700px){
+  .about-cards{ padding: 0 12px; }
+  .about-slide__head{ padding: 16px 14px; }
+  .about-slide__body{ padding: 0 14px 14px; }
+  .about-slide__content{ max-width: 100%; }
+  .about-slide--hero{ border-left-width: 4px; }
+  .about-slide__title,
+  .contact-slide__title{
+    font-size: 0.98rem;
+  }
+
+  /* pe telefon, micșorăm puțin mișcarea ca să nu pară “jittery” */
+  .about-slide__content{
+    transform: translateX(-10px);
+  }
+}
+
+
+
+/* ================= CONTACT SLIDERS ================= */
+.contact-cards{
+  max-width: 1240px;
+  margin: 22px auto 0;
+  display: grid;
+  gap: 12px;
+  padding: 0 18px;
+}
+
+.contact-slide{
+  background: #f3e9ff;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.contact-slide:nth-child(even){
+  background: #ffe8f4;
+}
+
+.contact-slide__head{
+  list-style: none;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 22px;
+  user-select: none;
+}
+.contact-slide__head::-webkit-details-marker{ display:none; }
+
+.contact-slide__icon{
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,0.06);
+  font-size: 14px;
+}
+
+.contact-slide__title{
+  font-weight: 600;
+  font-size: 1.05rem; /* ↓ mai aerisit */
+  line-height: 1.25;
+}
+
+.contact-slide__chev{
+  opacity: .65;
+  transition: transform .22s ease;
+}
+
+.contact-slide__body{
+  padding: 0 22px 18px;
+}
+
+/* content reveal (efect “scurgere/scris”) */
+.contact-slide__content{
+  max-width: 980px;
+  margin: 0 auto;
+
+  clip-path: inset(0 100% 0 0);
+
+  opacity: 0;
+  transform: translateX(-16px);
+  filter: blur(0.25px);
+
+  transition:
+    clip-path .48s cubic-bezier(.22,.61,.36,1),
+    opacity .26s ease,
+    transform .48s cubic-bezier(.22,.61,.36,1),
+    filter .26s ease;
+
+  will-change: clip-path, opacity, transform;
+}
+
+.contact-slide[open] .contact-slide__chev{
+  transform: rotate(180deg);
+}
+
+.contact-slide[open] .contact-slide__content{
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+  transform: translateX(0);
+  filter: blur(0);
+}
+
+/* hero */
+.contact-slide--hero{
+  background: linear-gradient(135deg, #f3e9ff, #ffe8f4);
+  border-left: 6px solid rgba(176, 130, 214, 0.65);
+}
+
+/* thanks/tip */
+.contact-slide--thanks{
+  background: linear-gradient(135deg, #fff0f8, #f5ecff);
+  border: 2px solid rgba(176, 130, 214, 0.25);
+}
+
+/* contact kv */
+.contact-kv{
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.contact-link{
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(0,0,0,0.25);
+}
+
+.contact-link:hover{
+  border-bottom-style: solid;
+}
+
+.contact-note{
+  margin-top: 12px;
+  opacity: 0.9;
+  line-height: 1.55;
+}
+
+/* list styling */
+.contact-slide__content p{ margin: 8px 0; line-height: 1.55; }
+.contact-slide__content ul{ margin: 8px 0 0 1.1rem; padding: 0; }
+.contact-slide__content li{ margin: 4px 0; }
+
+/* mobile */
+@media (max-width: 700px){
+  .contact-cards{ padding: 0 12px; }
+  .contact-slide__head{ padding: 16px 14px; }
+  .contact-slide__body{ padding: 0 14px 14px; }
+  .contact-slide__content{ max-width: 100%; }
+  .contact-slide--hero{ border-left-width: 4px; }
+
+  .contact-slide__content{
+    transform: translateX(-10px);
+  }
+}
+
+/* accesibilitate: dacă userul nu vrea animații */
+@media (prefers-reduced-motion: reduce){
+  .about-slide__content,
+  .contact-slide__content{
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    clip-path: none !important;
+  }
+}
+
+/* ================== EFECT “SCRIS / CURGERE” (ABOUT + CONTACT) ================== */
+@keyframes revealWrite {
+  0%{
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+    transform: translateX(-14px);
+    filter: blur(.35px);
+  }
+  100%{
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+/* starea închis (pregătește retrigger la fiecare open) */
+.about-slide__content,
+.contact-slide__content{
+  max-width: 980px;
+  margin: 0 auto;
+
+  clip-path: inset(0 100% 0 0);
+  opacity: 0;
+  transform: translateX(-14px);
+  filter: blur(.35px);
+
+  will-change: clip-path, opacity, transform, filter;
+}
+
+/* open -> rulează “scurgerea” */
+.about-slide[open] .about-slide__content,
+.contact-slide[open] .contact-slide__content{
+  animation: revealWrite .60s cubic-bezier(.22,.61,.36,1) both;
+}
+
+/* close -> fără animație (revine instant în starea “ascuns”) */
+.about-slide:not([open]) .about-slide__content,
+.contact-slide:not([open]) .contact-slide__content{
+  animation: none;
+}
+
+/* chevron */
+.about-slide[open] .about-slide__chev,
+.contact-slide[open] .contact-slide__chev{
+  transform: rotate(180deg);
+}
+
+/* mobile: mișcare un pic mai mică */
+@media (max-width: 700px){
+  .about-slide__content,
+  .contact-slide__content{
+    transform: translateX(-10px);
+  }
+}
+
+/* reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .about-slide__content,
+  .contact-slide__content{
+    animation: none !important;
+    clip-path: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+.about-slide__content,
+.contact-slide__content{
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 700px){
+  .about-slide__content,
+  .contact-slide__content{
+    font-size: 0.9rem;
+  }
+}
+
+.about-slide__head,
+.contact-slide__head{
+  padding: 16px 20px;
+}
+
+@media (max-width: 700px){
+  .about-slide__head,
+  .contact-slide__head{
+    padding: 14px 16px;
+  }
+}
+
+/* REVIEW form blocks */
+.guest-box,
+.receipt-box{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  margin:10px 0 12px 0;
+}
+
+.guest-box input,
+.receipt-box input{
+  width:100%;
+  max-width:100%;
+  padding:10px 12px;
+  border:1px solid #e2c8a8;
+  border-radius:12px;
+  outline:none;
+  background:#fff;
+}
+
+.guest-box input:focus,
+.receipt-box input:focus{
+  border-color:#caa06a;
+}
+
+.hint{ margin-top:4px; color:#7a5a2e; line-height:1.25; }
+.hint.error{ color:#b42318; }
+.hint.ok{ color:#027a48; }
+
+/* make textarea/button mobile-friendly */
+.cafe-textarea{
+  width:100%;
+  max-width:100%;
+  min-height:120px;
+  resize:vertical;
+  box-sizing:border-box;
+}
+
+/* Responsive polish */
+@media (max-width: 520px){
+  .cafe-review-section{
+    padding:14px; /* dacă ai deja padding, e ok */
+  }
+
+  .cafe-stars{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+    justify-content:flex-start;
+  }
+
+  .star-btn{
+    min-width:44px;
+    min-height:44px; /* touch friendly */
+    font-size:20px;
+  }
+
+  .chip.cafe-submit{
+    width:100%;
+    display:block;
+    text-align:center;
+    padding:12px 14px;
+  }
+
+  .guest-box input,
+  .receipt-box input{
+    padding:12px 12px; /* mai comod pe mobil */
+  }
+}
+
+
+/* ================= REVIEWS – PREMIUM LOOK ================= */
+
+/* card mai premium */
+.review-card{
+  background: linear-gradient(145deg, #d9f5e5, #cdebd9);
+  border-radius: 16px;
+  padding: 12px 14px;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.review-card:hover{
+  transform: translateY(-3px);
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.1),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+/* username */
+.review-user{
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #b16d07;
+}
+
+/* meta (cafe + date) */
+.review-meta{
+  font-size: 0.85rem;
+  opacity: 0.75;
+  margin-top: 2px;
+}
+
+/* rating mai elegant */
+.review-rating{
+  font-size: 1rem;
+  letter-spacing: 2px;
+  color: #d97706; /* mai elegant, mai premium */
+}
+
+
+/* ================= LABELS PRODUCTS & REVIEW ================= */
+
+/* Products: + Review: */
+.review-purchased b,
+.review-comment b{
+  color: var(--review-accent);     /* EXACT ca numele */
+  font-weight: 700;     /* bold clar */
+
+}
+
+/* secțiune produse */
+.review-purchased{
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+/* fiecare produs */
+.chiplet{
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.06);
+  color: var(--review-accent);
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+
+
+/* review text */
+.review-comment{
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #2e2e2e;
+  font-weight: 500;
+}
+
+.review-actions { margin: 8px 0 6px; display: flex; gap: 8px; flex-wrap: wrap; }
+.review-comment.ro { opacity: 0.9; }
+
+.btn-translate {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+.review-comment.ro {
+  opacity: 0.9;
+}
+.review-actions {
+  margin-top: 6px;
+}
+
+/* ===== Rating Premium Style ===== */
+
+.review-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.review-rating .stars {
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: #e7a33c; /* culoare stele – poți pune variabila ta de brand */
+}
+
+.review-rating .rating-badge {
+  background: linear-gradient(135deg, #e7a33c, #c47c18);
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 5px 9px;
+  border-radius: 50px;
+  min-width: 42px;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+/* =========================
+   TOP DRINKS
+   Desktop: fixed left
+   Mobile: modal (toggle)
+   ========================= */
+
+/* ===== DESKTOP (>= 901px) ===== */
+.top-drinks-float{
+  position: fixed;
+  top: 250px;
+  left: 100px;
+  width: 330px;
+  z-index: 50;
+}
+
+/* pe desktop backdrop nu are sens */
+.top-drinks-float .topdrinks-backdrop{ display:none; }
+
+/* dacă ecranul e prea îngust și sidebar-ul ar călca peste reviews -> îl ascundem desktop */
+@media (max-width: 1200px){
+  .top-drinks-float{ display:none; }
+}
+
+/* ===== MOBILE (<= 900px): modal ===== */
+@media (max-width: 900px){
+  .top-drinks-float{
+    display:none;
+    position: fixed;
+    inset: 0;
+    width: auto;
+    z-index: 1300;
+  }
+
+  .top-drinks-float.is-open{ display:block; }
+
+  .top-drinks-float .topdrinks-backdrop{
+    position:absolute;
+    inset:0;
+    background: rgba(0,0,0,0.22);
+    backdrop-filter: blur(2px);
+  }
+
+  .top-drinks-float .topcard{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 139px;
+    width: min(420px, calc(100vw - 24px));
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 420px){
+  .top-drinks-float .topcard{
+    top: 130px;
+    width: calc(100vw - 20px);
+  }
+}
+
+
+.top-drinks-float .topcard{
+  background: #f9ebc8;
+  border-radius: 18px;
+  padding: 16px 16px 14px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.top-drinks-float .topcard-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:6px;
+}
+
+.top-drinks-float .topcard-title{
+  margin:0;
+  font-size:1.08rem;
+  font-weight:850;
+  color:#2e2e2e;
+}
+
+.top-drinks-float .topcard-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:4px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  background: rgba(0,0,0,0.06);
+  color:#2e2e2e;
+}
+
+.top-drinks-float .topcard-subtitle{
+  margin:0 0 12px;
+  font-size:0.9rem;
+  opacity:.8;
+}
+
+.top-drinks-float .topcafes-list{
+  margin:0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:10px;
+}
+
+/* item cu badge de rank */
+.top-drinks-float .topcafe-item{
+  position: relative;
+  display: grid;
+  gap: 4px;
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 14px;
+  padding: 10px 12px 10px 44px;
+}
+
+.top-drinks-float .topcafe-item::before{
+  content: attr(data-rank);
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display:grid;
+  place-items:center;
+  font-weight: 900;
+  font-size: 12px;
+  background: rgba(214,176,139,.30);
+  color: #5b3702;
+}
+
+.top-drinks-float .topcafe-name{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  font-weight:900;
+  color:#5b3702;
+}
+
+.top-drinks-float .topcafe-badge{
+  background: linear-gradient(135deg, #e7a33c, #c47c18);
+  color:#fff;
+  font-weight:900;
+  font-size:12px;
+  padding:3px 9px;
+  border-radius:999px;
+  white-space:nowrap;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+
+.top-drinks-float .topcafe-meta{
+  font-size:.86rem;
+  opacity:.85;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.top-drinks-float .topcard-note{
+  margin:10px 0 0;
+  font-size:0.9rem;
+  opacity:.8;
+}
+/* =========================
+   TOP RATED
+   Desktop: fixed right
+   Mobile: modal (toggle)
+   ========================= */
+
+  /* ===== Title row: Reviews + trophy ===== */
+.page-title-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;  /* titlul rămâne centrat */
+  gap:10px;
+  position: relative;
+}
+
+/* butonul trophy lângă titlu */
+.toprated-title-btn{
+  display:none; /* default: ascuns pe desktop (dacă vrei) */
+  width:42px;
+  height:42px;
+  border-radius:999px;
+  border:2px solid rgba(214,176,139,.65);
+  background:#fffaf5;
+  box-shadow:0 10px 26px rgba(0,0,0,0.12);
+  cursor:pointer;
+  font-size:18px;
+  line-height:1;
+}
+
+/* pe mobil îl arătăm */
+@media (max-width: 900px){
+  .toprated-title-btn{
+    display:grid;
+    place-items:center;
+  }
+}
+
+/* ===== DESKTOP (>= 901px) ===== */
+.top-rated-float{
+  position: fixed;
+  top: 250px;
+  right: 100px;
+  width: 330px;
+  z-index: 50;
+}
+
+/* pe desktop backdrop-ul nu are sens */
+.top-rated-float .toprated-backdrop{ display:none; }
+
+.top-rated-float .topcard{
+  background: #f9ebc8;
+  border-radius: 18px;
+  padding: 16px 16px 14px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.top-rated-float .topcard-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:6px;
+}
+
+.top-rated-float .topcard-title{
+  margin:0;
+  font-size:1.08rem;
+  font-weight:850;
+  color:#2e2e2e;
+}
+
+.top-rated-float .topcard-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:4px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  background: rgba(0,0,0,0.06);
+  color:#2e2e2e;
+}
+
+.top-rated-float .topcard-subtitle{
+  margin:0 0 12px;
+  font-size:0.9rem;
+  opacity:.8;
+}
+
+.top-rated-float .topcafes-list{
+  margin:0;
+  padding:0;             /* scoatem indent-ul */
+  list-style:none;       /* scoatem numerotarea default */
+  display:grid;
+  gap:10px;
+}
+
+/* item cu badge de rank frumos */
+.top-rated-float .topcafe-item{
+  position: relative;
+  display: grid;
+  gap: 4px;
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 14px;
+  padding: 10px 12px 10px 44px;  /* loc pentru medalie */
+}
+
+.top-rated-float .topcafe-item::before{
+  content: attr(data-rank);
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display:grid;
+  place-items:center;
+  font-weight: 900;
+  font-size: 12px;
+  background: rgba(214,176,139,.30);
+  color: #5b3702;
+}
+
+.top-rated-float .topcafe-name{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  font-weight:900;
+  color:#5b3702;
+}
+
+.top-rated-float .topcafe-badge{
+  background: linear-gradient(135deg, #e7a33c, #c47c18);
+  color:#fff;
+  font-weight:900;
+  font-size:12px;
+  padding:3px 9px;
+  border-radius:999px;
+  white-space:nowrap;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+
+.top-rated-float .topcafe-meta{
+  font-size:.86rem;
+  opacity:.85;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.top-rated-float .topcard-note{
+  margin:10px 0 0;
+  font-size:0.9rem;
+  opacity:.8;
+}
+
+/* dacă ecranul e prea îngust și sidebar-ul ar călca peste reviews -> îl ascundem desktop */
+@media (max-width: 1200px){
+  .top-rated-float{ display:none; }
+}
+
+/* ===== MOBILE (<= 900px): modal ===== */
+@media (max-width: 900px){
+  .toprated-fab{ display:inline-grid; place-items:center; }
+
+  .top-rated-float{
+    display:none;
+    position: fixed;
+    inset: 0;
+    width: auto;
+    z-index: 1300;
+  }
+
+  .top-rated-float.is-open{ display:block; }
+
+  .top-rated-float .toprated-backdrop{
+    position:absolute;
+    inset:0;
+    background: rgba(0,0,0,0.22);
+    backdrop-filter: blur(2px);
+  }
+
+  /* ✅ POPUP CENTRAT (în aceeași coloană cu reviews) */
+  .top-rated-float .topcard{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 139px;
+    width: min(420px, calc(100vw - 24px));
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 420px){
+  .top-rated-float .topcard{
+    top: 130px;
+    width: calc(100vw - 20px);
+  }
+}
+
+/* ================= PROFILE PAGE ================= */
+
+.profile-page .page-section{
+  max-width: 1120px;
+}
+
+.profile-page-title{
+  font-size: clamp(1.9rem, 3vw, 2.3rem);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  color: #1f2430;
+  text-shadow: none;
+  margin: 0 0 6px;
+  text-align: center;
+  letter-spacing: .04em;
+}
+
+.profile-page-subtitle{
+  color: #6f7482;
+  font-size: .95rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0 0 20px;
+  text-align: center;
+  opacity: .8;
+}
+
+.profile-status{
+  text-align:center;
+  color:#6f7482;
+  margin:18px 0 24px;
+  font-weight:600;
+}
+
+.profile-hero-card{
+  border-radius: 26px;
+  padding: 26px 24px 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 28px rgba(31, 36, 48, 0.05);
+}
+
+.profile-hero-card--mint{
+  background: linear-gradient(180deg, #eef7f0 0%, #e8f3ed 100%);
+  border: 1px solid #d7eadb;
+}
+
+.profile-hero-main{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  margin-bottom:18px;
+}
+
+.profile-fullname{
+  font-size: clamp(1.9rem, 2.8vw, 2.5rem);
+  font-weight: 500;
+  color: #1f2430;
+  line-height: 1.08;
+}
+
+.profile-email{
+  margin-top: 8px;
+  color: #6f7482;
+  font-size: 1.02rem;
+}
+
+.profile-role-badge{
+  background:#d8efdb;
+  color:#1b6b3c;
+  border-radius:999px;
+  padding:10px 16px;
+  font-size:.92rem;
+  font-weight:800;
+  text-transform:capitalize;
+  white-space:nowrap;
+}
+
+.profile-identity{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:14px;
+}
+
+.profile-identity-badge{
+  background:#d8efdb;
+  color:#1b6b3c;
+  border-radius:999px;
+  padding:9px 16px;
+  font-weight:800;
+  box-shadow:none;
+}
+
+.profile-identity-text{
+  margin:0;
+  color:#68707d;
+  font-size:1rem;
+}
+
+.profile-stats-grid{
+  display:grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap:14px;
+  margin-bottom:18px;
+}
+
+.profile-stat-card{
+  background: linear-gradient(180deg, #f8fbff 0%, #eaf3ff 100%);
+  border:1px solid #cfe0f7;
+  border-radius:22px;
+  padding:18px 18px;
+  box-shadow: 0 10px 24px rgba(47, 114, 214, 0.08);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.profile-stat-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px rgba(47, 114, 214, 0.14);
+  border-color:#bdd4f3;
+  background: linear-gradient(180deg, #ffffff 0%, #e3efff 100%);
+}
+
+.profile-stat-top{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.profile-stat-icon{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  background:#dff0e3;
+  display:grid;
+  place-items:center;
+  flex:0 0 54px;
+}
+
+.profile-stat-icon svg{
+  width:24px;
+  height:24px;
+  fill:none;
+  stroke:#31a05f;
+  stroke-width:1.9;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.profile-stat-label{
+  display:block;
+  color:#5d6471;
+  font-size:.96rem;
+  margin-bottom:6px;
+}
+
+.profile-stat-value{
+  display:block;
+  color:#1f2430;
+  font-size:2rem;
+  font-weight:800;
+  line-height:1;
+}
+
+.profile-insights-grid{
+  display:grid;
+  grid-template-columns: 1.25fr .95fr;
+  gap:18px;
+  margin-bottom:18px;
+}
+
+.profile-panel{
+  background: linear-gradient(180deg, #f7fbff 0%, #edf5ff 100%);
+  border-radius:24px;
+  padding:22px 20px 18px;
+  box-shadow: 0 12px 28px rgba(47, 114, 214, 0.08);
+  margin-bottom:18px;
+  transition: box-shadow .18s ease, border-color .18s ease, background .18s ease, transform .18s ease;
+}
+
+.profile-panel:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 18px 34px rgba(47, 114, 214, 0.12);
+}
+
+.profile-panel--purple{
+  border: 1px solid #d9c7ff;
+}
+
+.profile-panel--blue{
+  border: 1px solid #cfe1ff;
+}
+
+.profile-panel--soft{
+  border: 1px solid #f0bfd8;
+  background: linear-gradient(180deg, #fffafd 0%, #fff1f7 100%);
+  box-shadow: 0 12px 28px rgba(240, 191, 216, 0.10);
+}
+
+.profile-panel h2{
+  margin:0;
+  color:#1f2430;
+  font-size:1.15rem;
+  font-weight:800;
+}
+
+.profile-panel-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.profile-panel-head-wrap{
+  align-items:flex-start;
+  flex-direction:column;
+}
+
+.profile-panel-pill{
+  border-radius:999px;
+  padding:7px 12px;
+  font-size:.8rem;
+  font-weight:800;
+}
+
+.profile-panel-pill--purple{
+  background:#ece3ff;
+  color:#7250d9;
+}
+
+.profile-panel-pill--blue{
+  background:#deebff;
+  color:#2f72d6;
+}
+
+.profile-sentiment-layout{
+  display:grid;
+  grid-template-columns: 220px 1fr;
+  gap:24px;
+  align-items:center;
+}
+
+.profile-pie-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.profile-pie-chart{
+  --p: 0;
+  --n: 0;
+  --neg: 0;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      #53b873 0 calc(var(--p) * 1%),
+      #f1c552 calc(var(--p) * 1%) calc((var(--p) + var(--n)) * 1%),
+      #f06a56 calc((var(--p) + var(--n)) * 1%) 100%
+    );
+  display:grid;
+  place-items:center;
+  box-shadow: 0 8px 20px rgba(31, 36, 48, 0.08);
+}
+
+.profile-pie-hole{
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: #ffffff;
+  display:grid;
+  place-items:center;
+  box-shadow: inset 0 0 0 1px #ececf3;
+}
+
+.profile-pie-hole span{
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #303646;
+}
+
+.profile-sentiment-stats--stack{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin-bottom:18px;
+}
+
+.profile-sentiment-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding-bottom:10px;
+  border-bottom:1px solid #dfe8f5;
+}
+
+.profile-sentiment-row:last-child{
+  border-bottom:none;
+  padding-bottom:0;
+}
+
+.profile-sentiment-left{
+  color:#303646;
+  font-size:1rem;
+  font-weight:600;
+}
+
+.profile-sentiment-right{
+  color:#4b5568;
+  font-weight:800;
+}
+
+.profile-mini-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  gap:12px;
+}
+
+.profile-mini-item{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:12px;
+  background: linear-gradient(180deg, #f8fbff 0%, #eaf3ff 100%);
+  border:1px solid #cfe0f7;
+  border-radius:16px;
+  padding:12px 14px;
+  box-shadow: 0 6px 14px rgba(47, 114, 214, 0.07);
+}
+
+.profile-mini-rank{
+  width:32px;
+  height:32px;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  background: linear-gradient(180deg, #d8e9ff 0%, #c7ddff 100%);
+  color:#2f72d6;
+  font-weight:800;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
+}
+
+.profile-mini-name{
+  font-weight:700;
+  color:#1f2430;
+}
+
+.profile-mini-count{
+  color:#697285;
+  font-weight:700;
+}
+
+.profile-review-tools{
+  width:100%;
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.profile-search-input{
+  flex:1 1 320px;
+  height:42px;
+  margin:0;
+  border:2px solid #efb7d4;
+  background:linear-gradient(180deg, #ffffff 0%, #fff4fa 100%);
+  color:#2d3442;
+  box-shadow:0 8px 18px rgba(240, 191, 216, 0.12);
+}
+
+.profile-search-input::placeholder{
+  color:#9aa3b3;
+}
+
+.profile-search-input:focus{
+  box-shadow:0 0 0 4px rgba(240, 191, 216, 0.14);
+  border-color:#e59cc3;
+  transform:none;
+}
+
+.profile-select-wrap{
+  position:relative;
+  min-width:200px;
+  flex:0 0 200px;
+}
+
+.profile-select-wrap::after{
+  content:"▼";
+  position:absolute;
+  right:16px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:11px;
+  color:#c2619d;
+  pointer-events:none;
+  line-height:1;
+}
+
+.profile-select{
+  width:100%;
+  height:42px;
+  padding:0 42px 0 16px;
+  border-radius:999px;
+  border:2px solid #efb7d4;
+  background:linear-gradient(180deg, #fff4f8 0%, #ffe9f2 100%);
+  color:#2d3442;
+  font-size:.95rem;
+  font-weight:600;
+  box-shadow:0 8px 18px rgba(240, 191, 216, 0.14);
+  outline:none;
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  cursor:pointer;
+  transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.profile-select:hover{
+  border-color:#e59cc3;
+  box-shadow:0 12px 24px rgba(240, 191, 216, 0.20);
+}
+
+.profile-select:focus{
+  border-color:#e59cc3;
+  box-shadow:0 0 0 4px rgba(240, 191, 216, 0.16);
+}
+
+.profile-reviews-status{
+  margin:0 0 14px;
+  color:#6f7482;
+  font-weight:600;
+}
+
+.profile-empty-line{
+  color:#7f8796;
+  margin:0;
+}
+
+.profile-reviews-panel .review-card{
+  background: linear-gradient(145deg, #d9f5e5 0%, #c8ead6 100%);
+  border-radius: 18px;
+  padding: 16px 16px;
+  box-shadow:
+    0 12px 24px rgba(76, 148, 103, 0.10),
+    inset 0 1px 0 rgba(255,255,255,0.7);
+  border: 1px solid #b9dec8;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.profile-reviews-panel .review-card:hover{
+  transform: translateY(-3px);
+  box-shadow:
+    0 18px 34px rgba(76, 148, 103, 0.14),
+    inset 0 1px 0 rgba(255,255,255,0.7);
+}
+
+@media (max-width: 980px){
+  .profile-stats-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .profile-insights-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px){
+  .profile-sentiment-layout{
+    grid-template-columns: 1fr;
+    gap:18px;
+  }
+
+  .profile-pie-chart{
+    width: 150px;
+    height: 150px;
+  }
+
+  .profile-pie-hole{
+    width: 82px;
+    height: 82px;
+  }
+}
+
+@media (max-width: 640px){
+  .profile-hero-main{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .profile-stats-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .profile-stat-top{
+    align-items:center;
+  }
+
+  .profile-fullname{
+    font-size:2rem;
+  }
+
+  .profile-review-tools{
+    flex-direction:column;
+  }
+
+  .profile-select-wrap,
+  .profile-select,
+  .profile-search-input{
+    width:100%;
+    min-width:100%;
+    flex:1 1 100%;
+  }
+}
+
+/* ================= FLOATING BUTTONS ================= */
+
+.ai-floating,
+.logout-floating{
+  position:fixed;
+  bottom:24px;
+  z-index:999;
+  padding:10px 18px;
+  border-radius:999px;
+  font-weight:600;
+  font-size:.9rem;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  text-decoration:none;
+  background:#fff;
+  border:1px solid #e5d5c5;
+  color:#6b4f3a;
+  box-shadow:0 6px 16px rgba(0,0,0,0.08);
+  transition:all .2s ease;
+}
+
+.ai-floating{
+  left:24px;
+}
+
+.logout-floating{
+  right:24px;
+}
+
+.ai-floating:hover,
+.logout-floating:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 22px rgba(0,0,0,0.12);
+  background:#fdfaf7;
+}
+
+@media (max-width:820px){
+  .logout-floating{
+    display:none !important;
+  }
+
+  .ai-floating{
+    display:inline-flex !important;
+  }
+}
+
+/* ================= AI POPUP CHAT ================= */
+
+.ai-popup{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+}
+
+.ai-popup[hidden]{
+  display:none !important;
+} 
+
+.ai-popup-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.28);
+  backdrop-filter:blur(3px);
+}
+
+.ai-popup-card{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%, -50%);
+  width:min(760px, calc(100vw - 32px));
+  height:min(640px, calc(100vh - 48px));
+  background:#fffaf5;
+  border:1px solid #ead5c3;
+  border-radius:28px;
+  box-shadow:0 24px 70px rgba(0,0,0,.24);
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+}
+
+.ai-popup-close{
+  position:absolute;
+  right:18px;
+  top:14px;
+  width:34px;
+  height:34px;
+  border:none;
+  border-radius:50%;
+  background:#fff;
+  color:#6b4f3a;
+  font-size:24px;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.ai-popup-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:14px;
+  padding-right:36px;
+  margin-bottom:16px;
+}
+
+.ai-popup-head h2{
+  margin:0 0 6px;
+  color:#2d2018;
+  font-size:1.8rem;
+}
+
+.ai-popup-head p{
+  margin:0;
+  color:#8b6d5c;
+  font-weight:600;
+}
+
+.ai-popup-head span{
+  font-size:2rem;
+}
+
+.ai-chat-messages{
+  flex:1;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  padding:16px;
+  background:#fff;
+  border:1px solid #f0dfce;
+  border-radius:20px;
+}
+
+.ai-message{
+  max-width:82%;
+  padding:12px 14px;
+  border-radius:18px;
+  line-height:1.45;
+  font-size:.95rem;
+}
+
+.ai-message-bot{
+  align-self:flex-start;
+  background:#f6eadf;
+  color:#4a3524;
+}
+
+.ai-message-user{
+  align-self:flex-end;
+  background:#d9f5e5;
+  color:#233b2b;
+}
+
+.ai-chat-form{
+  display:flex;
+  gap:10px;
+  margin-top:14px;
+}
+
+.ai-chat-form input{
+  flex:1;
+  border:2px solid #e1c3a2;
+  border-radius:999px;
+  padding:12px 16px;
+  outline:none;
+  font-size:.95rem;
+  background:#fff;
+}
+
+.ai-chat-form button{
+  border:none;
+  border-radius:999px;
+  padding:12px 20px;
+  background:#d6b08b;
+  color:#fff;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.ai-chat-form button:hover{
+  background:#b58a6a;
+}
+
+@media (max-width:700px){
+  .ai-popup-card{
+    left:10px;
+    right:10px;
+    top:auto;
+    bottom:72px;
+    transform:none;
+    width:auto;
+    height:auto;
+    max-height:calc(100vh - 96px);
+    border-radius:22px;
+    padding:16px;
+  }
+
+  .ai-popup-head h2{
+    font-size:1.35rem;
+  }
+
+  .ai-popup-head p{
+    font-size:.9rem;
+  }
+
+  .ai-chat-messages{
+    min-height:260px;
+    max-height:calc(100vh - 260px);
+  }
+
+  .ai-chat-form{
+    flex-direction:column;
+  }
+
+  .ai-chat-form button{
+    width:100%;
+  }
+}
+
+.about-actions-bottom {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+  margin-bottom: 10px;
+}
+
+.about-translate-btn {
+  font-size: 0.9rem;
+  padding: 10px 18px;
+}
+
+/* =========================================================
+   CAFÉ PHOTOS MODAL — WhereToCofi
+   Scoped CSS, ca să nu afecteze AI popup / reviews / profile
+   ========================================================= */
+
+/* Titlu cafenea + buton cameră */
+.cafe-title-line{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.cafe-title-line .cafe-title{
+  margin:0;
+}
+
+.cafe-photo-trigger{
+  width:42px;
+  height:42px;
+  border-radius:999px;
+  border:2px solid #d6b08b;
+  background:#fffaf5;
+  color:#3c2f2f;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  font-size:20px;
+  line-height:1;
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    background .18s ease;
+}
+
+.cafe-photo-trigger:hover{
+  transform:translateY(-2px);
+  background:#fff1e3;
+  box-shadow:0 12px 26px rgba(0,0,0,.12);
+}
+
+/* Modal poze */
+.photo-modal[hidden]{
+  display:none !important;
+}
+
+.photo-modal{
+  position:fixed;
+  inset:0;
+  z-index:2100; /* peste topbar și AI popup */
+}
+
+.photo-modal-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(34,24,16,.38);
+  backdrop-filter:blur(3px);
+}
+
+.photo-modal-card{
+  position:relative;
+  width:min(760px, calc(100vw - 28px));
+  max-height:min(82vh, 760px);
+  overflow:auto;
+  margin:7vh auto 0;
+  background:#fffaf5;
+  border:1px solid #ead5c3;
+  border-radius:28px;
+  box-shadow:0 24px 70px rgba(0,0,0,.24);
+  padding:22px;
+}
+
+.photo-modal-close{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:34px;
+  height:34px;
+  border:none;
+  border-radius:50%;
+  background:#fff;
+  color:#6b4f3a;
+  font-size:24px;
+  line-height:1;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.photo-modal-head{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding-right:42px;
+  margin-bottom:16px;
+}
+
+.photo-modal-icon{
+  width:48px;
+  height:48px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:#f6eadf;
+  border:2px solid #d6b08b;
+  font-size:22px;
+  flex:0 0 auto;
+}
+
+.photo-modal-head h2{
+  margin:0;
+  color:#2d2018;
+  font-size:1.45rem;
+  font-weight:900;
+}
+
+.photo-modal-head p{
+  margin:4px 0 0;
+  color:#8b6d5c;
+  font-weight:600;
+  font-size:.92rem;
+}
+
+/* Notă guest */
+.photo-note{
+  background:#d9f5e5;
+  color:#233b2b;
+  border-radius:16px;
+  padding:12px 14px;
+  margin-bottom:14px;
+  font-size:.92rem;
+  line-height:1.4;
+}
+
+/* Formular upload */
+.photo-upload-form{
+  display:grid;
+  gap:9px;
+  background:#fcf3e7;
+  padding:14px;
+  border-radius:18px;
+  margin-bottom:16px;
+  border:1px solid rgba(214,176,139,.45);
+}
+
+.photo-upload-form input[type="text"],
+.photo-upload-form input[type="file"]{
+  width:100%;
+  border:1px solid #d6b08b;
+  border-radius:12px;
+  padding:11px 12px;
+  background:#fff;
+  color:#3c2f2f;
+  font-family:inherit;
+}
+
+.photo-upload-form input[type="text"]:focus,
+.photo-upload-form input[type="file"]:focus{
+  outline:none;
+  box-shadow:0 0 0 2px rgba(214,176,139,.35);
+}
+
+.photo-upload-form .chip{
+  justify-self:start;
+  margin-top:2px;
+}
+
+/* ca să nu se suprapună cu .muted din alte zone */
+.photo-upload-form .muted{
+  font-weight:400;
+  opacity:.68;
+}
+
+/* Grid poze */
+.photo-grid{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:14px;
+}
+
+.photo-card{
+  background:#fff;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid rgba(214,176,139,.45);
+  box-shadow:0 10px 24px rgba(0,0,0,.08);
+}
+
+.photo-card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  display:block;
+  background:#f6eadf;
+}
+
+.photo-card-body{
+  padding:10px 12px 12px;
+}
+
+.photo-card-body p{
+  margin:0 0 6px;
+  color:#3c2f2f;
+  font-size:.92rem;
+  line-height:1.35;
+}
+
+.photo-card-body small{
+  color:#8b6d5c;
+  font-size:.8rem;
+}
+
+.photo-empty{
+  grid-column:1 / -1;
+  background:#fcf3e7;
+  border-radius:16px;
+  padding:14px;
+  margin:0;
+  color:#6f5647;
+  font-weight:600;
+}
+
+body.photo-modal-open{
+  overflow:hidden;
+}
+
+/* Mobil */
+@media (max-width: 640px){
+  .cafe-title-line{
+    gap:8px;
+  }
+
+  .cafe-photo-trigger{
+    width:38px;
+    height:38px;
+    font-size:18px;
+  }
+
+  .photo-modal-card{
+    width:calc(100vw - 22px);
+    margin:64px auto 0;
+    padding:16px;
+    border-radius:22px;
+    max-height:calc(100vh - 82px);
+  }
+
+  .photo-modal-head{
+    align-items:flex-start;
+    gap:10px;
+  }
+
+  .photo-modal-icon{
+    width:42px;
+    height:42px;
+    font-size:20px;
+  }
+
+  .photo-modal-head h2{
+    font-size:1.25rem;
+  }
+
+  .photo-grid{
+    grid-template-columns:1fr;
+  }
+
+  .photo-card img{
+    height:210px;
+  }
+
+  .photo-upload-form .chip{
+    width:100%;
+    text-align:center;
+  }
+}
+
+/* ===== Admin delete button for café photos ===== */
+
+.photo-img-wrap{
+  position:relative;
+}
+
+.photo-delete-btn{
+  position:absolute;
+  top:10px;
+  right:10px;
+  border:none;
+  border-radius:999px;
+  padding:7px 12px;
+  background:rgba(176, 35, 24, .92);
+  color:#fff;
+  font-size:.78rem;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.20);
+  transition:transform .16s ease, background .16s ease, box-shadow .16s ease;
+}
+
+.photo-delete-btn:hover{
+  transform:translateY(-1px);
+  background:#991b1b;
+  box-shadow:0 10px 22px rgba(0,0,0,.25);
+}
+
+@media (max-width:640px){
+  .photo-delete-btn{
+    top:8px;
+    right:8px;
+    padding:7px 10px;
+    font-size:.75rem;
+  }
+}
+
+/* ===== CAFÉ PHOTO UPLOAD — compact premium look ===== */
+
+.photo-upload-form{
+  display:grid;
+  grid-template-columns: 1fr auto;
+  gap:10px 12px;
+  align-items:end;
+  background:#fff6ec;
+  border:1px solid rgba(214,176,139,.55);
+  border-radius:18px;
+  padding:14px;
+  margin-bottom:18px;
+}
+
+/* labelurile */
+.photo-upload-form label{
+  margin:0;
+  font-size:.9rem;
+  color:#3c2f2f;
+}
+
+/* primul label pe toată lățimea */
+.photo-upload-form label[for="photoFile"]{
+  grid-column:1 / -1;
+}
+
+/* file input pe toată lățimea */
+#photoFile{
+  grid-column:1 / -1;
+  width:100%;
+  padding:9px 10px;
+  border:1px dashed #d6b08b;
+  border-radius:14px;
+  background:#fffaf5;
+  cursor:pointer;
+  font-size:.88rem;
+}
+
+/* butonul nativ Choose file */
+#photoFile::file-selector-button{
+  border:none;
+  border-radius:999px;
+  background:#d6b08b;
+  color:#fff;
+  padding:7px 12px;
+  margin-right:10px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+#photoFile::file-selector-button:hover{
+  background:#b58a6a;
+}
+
+/* caption */
+.photo-upload-form label[for="photoCaption"]{
+  grid-column:1 / 2;
+}
+
+#photoCaption{
+  grid-column:1 / 2;
+  width:100%;
+  height:42px;
+  padding:10px 13px;
+  border:1px solid #d6b08b;
+  border-radius:14px;
+  background:#fff;
+  font-size:.9rem;
+}
+
+/* buton upload */
+#photoUploadBtn{
+  grid-column:2 / 3;
+  height:42px;
+  align-self:end;
+  white-space:nowrap;
+  padding:8px 16px;
+  box-shadow:none;
+}
+
+/* mesajul de succes/eroare */
+#photoUploadHint{
+  grid-column:1 / -1;
+  margin:0;
+  padding:2px 2px 0;
+  font-size:.86rem;
+}
+
+/* formularul să nu pară mai important decât pozele */
+.photo-upload-form b{
+  font-weight:800;
+}
+
+.photo-upload-form .muted{
+  font-size:.86rem;
+  color:#8b6d5c;
+}
+
+/* Cardurile de poze mai aliniate */
+.photo-card{
+  border-radius:18px;
+  overflow:hidden;
+}
+
+.photo-card img{
+  height:230px;
+}
+
+.photo-card-body{
+  min-height:70px;
+}
+
+/* Pe mobil: totul pe o coloană */
+@media (max-width:640px){
+  .photo-upload-form{
+    grid-template-columns:1fr;
+    padding:12px;
+    gap:9px;
+  }
+
+  .photo-upload-form label,
+  #photoFile,
+  #photoCaption,
+  #photoUploadBtn,
+  #photoUploadHint{
+    grid-column:1 / -1;
+  }
+
+  #photoUploadBtn{
+    width:100%;
+  }
+
+  .photo-card img{
+    height:210px;
+  }
+}
+
+/* ===== Smaller photo caption area ===== */
+
+.photo-card-body{
+  min-height:52px;
+  padding:8px 10px 10px;
+}
+
+.photo-card-body p{
+  margin:0 0 4px;
+  font-size:.82rem;
+  line-height:1.25;
+  color:#3c2f2f;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.photo-card-body small{
+  display:block;
+  font-size:.74rem;
+  line-height:1.2;
+  color:#8b6d5c;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* ===== See full picture button ===== */
+
+.photo-img-wrap{
+  position:relative;
+  overflow:hidden;
+}
+
+.photo-full-btn{
+  position:absolute;
+  left:10px;
+  bottom:10px;
+  border:none;
+  border-radius:999px;
+  padding:7px 12px;
+  background:rgba(255,250,245,.94);
+  color:#5b3702;
+  font-size:.76rem;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.18);
+  opacity:0;
+  transform:translateY(5px);
+  transition:opacity .18s ease, transform .18s ease, background .18s ease;
+}
+
+.photo-img-wrap:hover .photo-full-btn{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.photo-full-btn:hover{
+  background:#fff1e3;
+}
+
+/* pe mobil îl lăsăm mereu vizibil */
+@media (max-width:640px){
+  .photo-full-btn{
+    opacity:1;
+    transform:none;
+    font-size:.68rem;
+    padding:6px 9px;
+    left:8px;
+    bottom:8px;
+    background:rgba(255,250,245,.88);
+  }
+}
+
+/* ===== Full picture viewer ===== */
+
+.full-photo-viewer[hidden]{
+  display:none !important;
+}
+
+.full-photo-viewer{
+  position:fixed;
+  inset:0;
+  z-index:2600;
+}
+
+.full-photo-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(20,14,10,.72);
+  backdrop-filter:blur(4px);
+}
+
+.full-photo-card{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%, -50%);
+  width:min(920px, calc(100vw - 28px));
+  max-height:calc(100vh - 36px);
+  background:#fffaf5;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 26px 80px rgba(0,0,0,.35);
+}
+
+.full-photo-card img{
+  width:100%;
+  max-height:calc(100vh - 150px);
+  object-fit:contain;
+  display:block;
+  background:#1f1712;
+}
+
+.full-photo-close{
+  position:absolute;
+  top:12px;
+  right:12px;
+  width:36px;
+  height:36px;
+  border:none;
+  border-radius:999px;
+  background:#fff;
+  color:#6b4f3a;
+  font-size:24px;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.18);
+  z-index:2;
+}
+
+.full-photo-info{
+  padding:10px 14px 13px;
+}
+
+.full-photo-info p{
+  margin:0 0 4px;
+  font-size:.92rem;
+  color:#3c2f2f;
+}
+
+.full-photo-info small{
+  color:#8b6d5c;
+  font-size:.8rem;
+}
+
+@media (max-width:640px){
+  .full-photo-card{
+    width:calc(100vw - 18px);
+    border-radius:18px;
+  }
+
+  .full-photo-card img{
+    max-height:calc(100vh - 130px);
+  }
+}
+
+/* ================= PROFILE TOP: USER + PHOTOS ================= */
+
+.profile-top-grid{
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap:18px;
+  margin-bottom:18px;
+}
+
+.profile-top-grid .profile-hero-card{
+  margin-bottom:0;
+  height:100%;
+}
+
+.profile-photos-card{
+  background: linear-gradient(180deg, #eef7f0 0%, #e8f3ed 100%);
+  border:1px solid #d7eadb;
+}
+
+.profile-photos-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.profile-photos-head h2{
+  margin:0 0 4px;
+  font-size:1.2rem;
+  color:#1f2430;
+}
+
+.profile-photos-head p{
+  margin:0;
+  color:#6f7482;
+  font-size:.94rem;
+}
+
+.profile-photo-mini-grid{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:10px;
+}
+
+.profile-photo-mini-card{
+  position:relative;
+  border:none;
+  padding:0;
+  border-radius:18px;
+  overflow:hidden;
+  height:128px;
+  cursor:pointer;
+  background:#f6eadf;
+  box-shadow:0 8px 18px rgba(31,36,48,.08);
+}
+
+.profile-photo-mini-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .2s ease;
+}
+
+.profile-photo-mini-card:hover img{
+  transform:scale(1.04);
+}
+
+.profile-photo-mini-overlay{
+  position:absolute;
+  inset:auto 0 0 0;
+  padding:24px 10px 9px;
+  background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(30,20,12,.74) 100%);
+  color:#fff;
+  text-align:left;
+}
+
+.profile-photo-mini-overlay b,
+.profile-photo-mini-overlay small{
+  display:block;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.profile-photo-mini-overlay b{
+  font-size:.82rem;
+}
+
+.profile-photo-mini-overlay small{
+  font-size:.72rem;
+  opacity:.88;
+  margin-top:2px;
+}
+
+.profile-photo-more{
+  display:grid;
+  place-items:center;
+  min-height:80px;
+  border-radius:18px;
+  background:#fcf3e7;
+  border:1px dashed #d6b08b;
+  color:#8b6d5c;
+  font-weight:800;
+}
+
+@media (max-width: 980px){
+  .profile-top-grid{
+    grid-template-columns:1fr;
+  }
+
+  .profile-photo-mini-card{
+    height:150px;
+  }
+}
+
+@media (max-width: 640px){
+  .profile-photo-mini-grid{
+    grid-template-columns:1fr;
+  }
+
+  .profile-photo-mini-card{
+    height:190px;
+  }
+}
+
+/* =========================
+   REVIEW SENTIMENT — separate card
+   Desktop: small fixed card left
+   Mobile: always visible bottom bar
+   ========================= */
+
+.reviews-page .reviews-sentiment-fixed{
+  position:fixed;
+  left:100px;
+  top:620px;
+  width:330px;
+  z-index:55;
+  background:#f9ebc8;
+  border:1px solid rgba(0,0,0,0.05);
+  border-radius:18px;
+  padding:16px 14px 14px;
+  box-shadow:0 6px 18px rgba(0,0,0,.05);
+}
+
+.reviews-page .reviews-sentiment-fixed .sentiment-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.reviews-page .reviews-sentiment-fixed .sentiment-head h3{
+  margin:0;
+  font-size:1.05rem;
+  line-height:1.3;
+}
+
+.reviews-page .reviews-sentiment-fixed .sentiment-total{
+  font-size:0.82rem;
+  opacity:.75;
+  text-align:right;
+  line-height:1.25;
+}
+
+.reviews-page .reviews-sentiment-fixed .sentiment-stats{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.reviews-page .reviews-sentiment-fixed .sentiment-box{
+  flex:1;
+  background:#fffaf4;
+  border:1px solid #ecd7bd;
+  border-radius:13px;
+  padding:12px 10px;
+  text-align:center;
+}
+
+.reviews-page .reviews-sentiment-fixed .sentiment-label{
+  font-size:0.76rem;
+  margin-bottom:7px;
+  line-height:1.2;
+}
+
+.reviews-page .reviews-sentiment-fixed .sentiment-value{
+  font-size:1.08rem;
+  font-weight:700;
+}
+
+.reviews-page .reviews-sentiment-fixed .sentiment-bar{
+  width:100%;
+  height:11px;
+  display:flex;
+  overflow:hidden;
+  border-radius:999px;
+  background:#eee3d4;
+}
+
+.reviews-page .reviews-sentiment-fixed .bar-positive,
+.reviews-page .reviews-sentiment-fixed .bar-neutral,
+.reviews-page .reviews-sentiment-fixed .bar-negative{
+  height:100%;
+  width:0;
+  transition:width .35s ease;
+}
+
+.reviews-page .reviews-sentiment-fixed .bar-positive{ background:#9ad8a5; }
+.reviews-page .reviews-sentiment-fixed .bar-neutral{ background:#e6d39a; }
+.reviews-page .reviews-sentiment-fixed .bar-negative{ background:#e6a0a0; }
+
+/* dacă ecranul e prea îngust, ascundem cardul desktop */
+@media (max-width:1200px) and (min-width:901px){
+  .reviews-page .reviews-sentiment-fixed{
+    display:none;
+  }
+}
+
+/* MOBILE: sentiment analysis stă permanent jos */
+@media (max-width:900px){
+  .reviews-page .app{
+    padding-bottom:150px;
+  }
+
+  .reviews-page .reviews-sentiment-fixed{
+    display:block;
+    position:fixed;
+    left:50%;
+    right:auto;
+    top:auto;
+    bottom:10px;
+    transform:translateX(-50%);
+    width:min(390px, calc(100vw - 22px));
+    z-index:1250;
+    padding:10px 12px 11px;
+    border-radius:18px;
+    background:#fff7dc;
+    border:1px solid rgba(214,176,139,.55);
+    box-shadow:0 12px 34px rgba(0,0,0,.18);
+  }
+
+  .reviews-page .reviews-sentiment-fixed .sentiment-head{
+    align-items:center;
+    margin-bottom:8px;
+  }
+
+  .reviews-page .reviews-sentiment-fixed .sentiment-head h3{
+    font-size:.86rem;
+    line-height:1.15;
+  }
+
+  .reviews-page .reviews-sentiment-fixed .sentiment-total{
+    font-size:.68rem;
+    white-space:nowrap;
+  }
+
+  .reviews-page .reviews-sentiment-fixed .sentiment-stats{
+    gap:6px;
+    margin-bottom:8px;
+  }
+
+  .reviews-page .reviews-sentiment-fixed .sentiment-box{
+    padding:6px 5px;
+    border-radius:11px;
+  }
+
+  .reviews-page .reviews-sentiment-fixed .sentiment-label{
+    font-size:.62rem;
+    margin-bottom:3px;
+  }
+
+  .reviews-page .reviews-sentiment-fixed .sentiment-value{
+    font-size:.82rem;
+  }
+
+  .reviews-page .reviews-sentiment-fixed .sentiment-bar{
+    height:8px;
+  }
+}
+
+/* ================= AI ASSISTANT FLOATING — DESKTOP BUTTON + MOBILE ORB ================= */
+
+/* desktop: buton lung, ca înainte */
+.ai-mobile-orb{
+  position:fixed;
+}
+
+.ai-floating.ai-mobile-orb{
+  left:24px;
+  right:auto;
+  bottom:24px;
+  min-width:220px;
+  height:48px;
+  padding:8px 18px 8px 10px;
+  border-radius:999px;
+  display:inline-flex !important;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  background:#fff;
+  border:1px solid #e5d5c5;
+  color:#6b4f3a;
+  box-shadow:0 6px 16px rgba(0,0,0,0.08);
+  z-index:1050;
+  overflow:visible;
+}
+
+.ai-floating.ai-mobile-orb:hover{
+  transform:translateY(-2px);
+  background:#fffaf5;
+  box-shadow:0 10px 22px rgba(0,0,0,0.12);
+}
+
+.ai-orb-icon{
+  width:32px;
+  height:32px;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  background:#ffcaca;
+  border:1px solid #d6b08b;
+  overflow:hidden;
+  flex:0 0 32px;
+  line-height:1;
+}
+
+.ai-robot-img{
+  width:34px;
+  height:34px;
+  object-fit:cover;
+  object-position:center;
+  transform:scale(1.12);
+  display:block;
+}
+
+.ai-orb-label{
+  display:inline;
+  font-weight:800;
+  font-size:.92rem;
+  color:#6b4f3a;
+  white-space:nowrap;
+}
+
+.ai-orb-bubble{
+  display:none;
+}
+
+/* mobile: cerc mic cu poza robotului + norișor temporar */
+@media (max-width:820px){
+  .ai-floating.ai-mobile-orb{
+    left:16px;
+    right:auto;
+    bottom:18px;
+    min-width:0;
+    width:62px;
+    height:62px;
+    padding:0;
+    border-radius:999px;
+    display:grid !important;
+    place-items:center;
+    background:transparent;
+    border:none;
+    box-shadow:none;
+  }
+
+  .ai-floating.ai-mobile-orb:hover{
+    background:transparent;
+    box-shadow:none;
+  }
+
+  .ai-mobile-orb .ai-orb-label{
+    display:none;
+  }
+
+  .ai-mobile-orb .ai-orb-icon{
+    width:58px;
+    height:58px;
+    border-radius:999px;
+    background:#ffcaca;
+    border:2px solid #d6b08b;
+    box-shadow:0 10px 24px rgba(0,0,0,.14);
+  }
+
+  .ai-mobile-orb .ai-robot-img{
+    width:60px;
+    height:60px;
+    transform:scale(1.16);
+  }
+
+  .ai-mobile-orb::after{
+    content:"";
+    position:absolute;
+    inset:-6px;
+    border-radius:999px;
+    border:1px solid rgba(214,176,139,.42);
+    animation:aiOrbPulse 2.2s ease-out infinite;
+    pointer-events:none;
+  }
+
+  .ai-mobile-orb .ai-orb-bubble{
+    display:block;
+    position:absolute;
+    left:70px;
+    bottom:10px;
+    min-width:156px;
+    max-width:190px;
+    padding:9px 12px;
+    border-radius:16px 16px 16px 6px;
+    background:#fffaf5;
+    border:1px solid #ead5c3;
+    color:#5b3702;
+    font-size:.78rem;
+    font-weight:800;
+    line-height:1.2;
+    box-shadow:0 10px 24px rgba(0,0,0,.14);
+    opacity:0;
+    transform:translateX(-8px) scale(.96);
+    pointer-events:none;
+    animation:aiBubbleIntro 4.8s ease forwards;
+  }
+
+  .ai-mobile-orb .ai-orb-bubble::before{
+    content:"";
+    position:absolute;
+    left:-6px;
+    bottom:12px;
+    width:12px;
+    height:12px;
+    background:#fffaf5;
+    border-left:1px solid #ead5c3;
+    border-bottom:1px solid #ead5c3;
+    transform:rotate(45deg);
+  }
+}
+
+@keyframes aiOrbPulse{
+  0%{
+    transform:scale(.92);
+    opacity:.75;
+  }
+
+  70%{
+    transform:scale(1.18);
+    opacity:0;
+  }
+
+  100%{
+    transform:scale(1.18);
+    opacity:0;
+  }
+}
+
+@keyframes aiBubbleIntro{
+  0%{
+    opacity:0;
+    transform:translateX(-8px) scale(.96);
+  }
+
+  12%{
+    opacity:1;
+    transform:translateX(0) scale(1);
+  }
+
+  72%{
+    opacity:1;
+    transform:translateX(0) scale(1);
+  }
+
+  100%{
+    opacity:0;
+    transform:translateX(-6px) scale(.98);
+  }
+}
+
+@media (max-width:380px){
+  .ai-mobile-orb .ai-orb-bubble{
+    min-width:136px;
+    max-width:155px;
+    font-size:.72rem;
+    left:66px;
+  }
+}
+/* ===== PROFILE PHOTO DELETE BUTTON ===== */
+
+.profile-photo-mini-card{
+  position:relative;
+}
+
+.profile-photo-delete-btn{
+  position:absolute;
+  top:8px;
+  right:8px;
+  z-index:3;
+  border:none;
+  border-radius:999px;
+  padding:6px 10px;
+  background:rgba(176, 35, 24, .92);
+  color:#fff;
+  font-size:.72rem;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.22);
+  opacity:0;
+  transform:translateY(-4px);
+  transition:opacity .18s ease, transform .18s ease, background .18s ease;
+}
+
+.profile-photo-mini-card:hover .profile-photo-delete-btn{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.profile-photo-delete-btn:hover{
+  background:#991b1b;
+}
+
+@media (max-width:640px){
+  .profile-photo-delete-btn{
+    opacity:1;
+    transform:none;
+    top:10px;
+    right:10px;
+    padding:7px 11px;
+    font-size:.74rem;
+  }
+}
+/* =========================================================
+   DESKTOP CSS ZOOM FIX
+   Face pagina să arate ca browser zoom 80% pe laptop/desktop.
+   Nu se aplică pe mobil.
+   ========================================================= */
+
+@media (min-width: 821px) {
+  body {
+    zoom: 0.85;
+  }
+}
+
+/* pe mobil NU micșorăm aplicația */
+@media (max-width: 820px) {
+  body {
+    zoom: 1;
+  }
+}
+
+/* =========================================================
+   CAFE PAGE — sticky header without covering sections
+   ========================================================= */
+
+/* containerul paginii */
+.cafe-page{
+  margin-top: 12px;
+}
+
+/* header sticky, dar mai mic și opac */
+.cafe-header{
+  position: sticky;
+  top: 56px;
+  z-index: 950;
+
+  width: 100%;
+  margin: 0 auto 26px;
+  padding: 12px 16px 10px;
+
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+  background: #fff;
+  border-bottom: 1px solid rgba(214,176,139,.28);
+  box-shadow: 0 8px 16px rgba(0,0,0,.035);
+}
+
+/* fundal alb pe toată lățimea ca să nu se vadă cardurile prin spate */
+.cafe-header::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: -18px;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: #fff;
+  border-bottom: 1px solid rgba(214,176,139,.22);
+  z-index: -1;
+}
+
+/* ținem conținutul centrat */
+.cafe-title-wrap{
+  width: 100%;
+  max-width: 760px;
+}
+
+/* titlu mai compact */
+.cafe-title{
+  font-size: clamp(21px, 1.8vw, 26px);
+  line-height: 1.05;
+}
+
+/* subtitlu compact */
+.cafe-subtitle{
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+/* butoanele rămân în header */
+.cafe-nav{
+  position: static;
+  margin: 9px 0 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  gap: 8px;
+}
+
+/* butoane mai mici */
+.cafe-nav-btn{
+  padding: 5px 12px;
+  font-size: 12px;
+  background: #fff;
+}
+
+/* IMPORTANT: prima secțiune nu mai intră sub header */
+.cafe-sections{
+  padding-top: 8px;
+}
+
+/* când apeși pe butoane, secțiunea se oprește sub header */
+.cafe-section{
+  scroll-margin-top: 150px;
+}
+
+/* mobil */
+@media (max-width: 820px){
+  .cafe-header{
+    top: 52px;
+    margin-bottom: 22px;
+    padding: 10px 10px 9px;
+  }
+
+  .cafe-header::before{
+    bottom: -14px;
+  }
+
+  .cafe-title{
+    font-size: 19px;
+  }
+
+  .cafe-subtitle{
+    font-size: 11px;
+  }
+
+  .cafe-nav{
+    margin-top: 7px;
+    gap: 6px;
+  }
+
+  .cafe-nav-btn{
+    padding: 5px 9px;
+    font-size: 11px;
+  }
+
+  .cafe-sections{
+    padding-top: 6px;
+  }
+
+  .cafe-section{
+    scroll-margin-top: 135px;
+  }
+}
+
+/* =========================================================
+   TOAST GLOBAL - CENTER SCREEN
+   Fix pentru mesajele showToast()
+   ========================================================= */
+
+#toastHost {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 999999 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  padding: 20px !important;
+  pointer-events: none !important;
+}
+
+/* acoperim mai multe variante de clasă, în caz că toast.js folosește alt nume */
+#toastHost .toast,
+#toastHost .toast-item,
+#toastHost .toast-message,
+#toastHost > div {
+  position: relative !important;
+
+  max-width: min(430px, calc(100vw - 40px)) !important;
+  width: fit-content !important;
+
+  margin: 0 !important;
+  padding: 14px 18px !important;
+
+  border-radius: 18px !important;
+  background: #fff7ef !important;
+  color: #2b1b12 !important;
+  border: 1px solid #d6b08b !important;
+
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22) !important;
+
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  line-height: 1.4 !important;
+  text-align: center !important;
+
+  pointer-events: auto !important;
+
+  transform: none !important;
+  animation: toastCenterPop 0.22s ease-out !important;
+}
+
+/* error */
+#toastHost .toast.error,
+#toastHost .toast-item.error,
+#toastHost .toast-message.error,
+#toastHost > div.error {
+  background: #fff1f1 !important;
+  border-color: #e6a3a3 !important;
+  color: #7a1f1f !important;
+}
+
+/* success / ok */
+#toastHost .toast.success,
+#toastHost .toast.ok,
+#toastHost .toast-item.success,
+#toastHost .toast-item.ok,
+#toastHost .toast-message.success,
+#toastHost .toast-message.ok,
+#toastHost > div.success,
+#toastHost > div.ok {
+  background: #f1fff5 !important;
+  border-color: #9ed8aa !important;
+  color: #1f6b33 !important;
+}
+
+/* info */
+#toastHost .toast.info,
+#toastHost .toast-item.info,
+#toastHost .toast-message.info,
+#toastHost > div.info {
+  background: #fff7ef !important;
+  border-color: #d6b08b !important;
+  color: #5b3702 !important;
+}
+
+@keyframes toastCenterPop {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* pe mobil îl ținem tot pe mijloc, nu jos lângă AI */
+@media (max-width: 820px) {
+  #toastHost {
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 18px !important;
+  }
+
+  #toastHost .toast,
+  #toastHost .toast-item,
+  #toastHost .toast-message,
+  #toastHost > div {
+    max-width: calc(100vw - 36px) !important;
+    font-size: 13px !important;
+    border-radius: 16px !important;
+  }
+}

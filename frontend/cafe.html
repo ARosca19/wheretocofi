@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WhereToCofi · Cofi spot details</title>
+
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- CONFIG -->
+  <script defer src="config/config.js"></script>
+
+  <!-- CORE -->
+  <script defer src="js/storage.js"></script>
+  <script defer src="js/toast.js"></script>
+  <script defer src="js/api.js"></script>
+
+  <!-- UI -->
+  <script defer src="js/ui.auth.js"></script>
+  <script defer src="js/ui.menu.js"></script>
+
+  <!-- ADMIN (safe) -->
+  <script defer src="js/admin.dialog.js"></script>
+  <script defer src="js/admin.users.js"></script>
+  <script defer src="js/admin.cafes.js"></script>
+
+  <script defer src="js/features.search.js"></script>
+  <script defer src="js/features.slider.js"></script>
+  <script defer src="js/features.favorites.js"></script>
+
+  <!-- PAGE SCRIPTS -->
+  <script defer src="reviews.js"></script>
+  <script defer src="cafe.js"></script>
+
+  <!-- BOOT -->
+  <script defer src="js/main.js"></script>
+</head>
+
+<body class="js-loading">
+  <header class="topbar" role="banner">
+    <div class="topbar-left">
+      <a href="frame1.html" class="brand-inline" aria-label="WhereToCofi Home">
+        <svg class="coffee-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M17 8H5a1 1 0 0 0-1 1v2a5 5 0 0 0 5 5h4a5 5 0 0 0 5-5V9a1 1 0 0 0-1-1Z" />
+          <path d="M17 10h2a2 2 0 1 1 0 4h-2M7 18h10M9 6c0-1 .8-1.2.8-2S9 2 9 2m3 4c0-1 .8-1.2.8-2S12 2 12 2" />
+        </svg>
+        <span class="brand-small">↩ Home</span>
+      </a>
+
+      <div class="auth-inline">
+        <a href="#" id="btnMyCafecitos" class="chip" style="display:none;">My Cafecitos☕</a>
+        <a href="profile.html" id="btnProfile" class="chip" style="display:none;">My Profile👤</a>
+
+        <div class="admin-panel-wrapper">
+          <button id="btnAdminPanel" class="chip" style="display:none;">Admin panel ▾</button>
+          <div id="adminPanelMenu" class="admin-panel-menu">
+            <button type="button" class="admin-panel-item" data-action="admin-create">Create users</button>
+            <button type="button" class="admin-panel-item" data-action="admin-edit">Edit users</button>
+            <button type="button" class="admin-panel-item" data-action="admin-delete">Delete users</button>
+            <div class="admin-panel-separator"></div>
+            <button type="button" class="admin-panel-item" data-action="admin-create-cafe">Create cafes</button>
+            <button type="button" class="admin-panel-item" data-action="admin-edit-cafe">Edit cafes</button>
+            <button type="button" class="admin-panel-item" data-action="admin-delete-cafe">Delete cafes</button>
+          </div>
+        </div>
+
+        <a href="#" id="btnLogin" class="chip">Log In</a>
+        <a href="#" id="btnSignup" class="chip">Sign Up</a>
+      </div>
+    </div>
+
+    <div class="topbar-center">
+      <span id="helloUser" class="hello-center"></span>
+    </div>
+
+    <nav class="topbar-right desktop-nav" id="desktopNav" aria-label="Main">
+      <a href="reviews.html" class="chip">Reviews☕</a>
+      <a href="about.html" class="chip">About☕☕</a>
+      <a href="contact.html" class="chip">Contact☕☕☕</a>
+    </nav>
+
+    <button class="menu-toggle dots-vertical" id="menuToggle" aria-label="Menu" aria-expanded="false"
+      aria-controls="mnav">
+      <span></span>
+    </button>
+    <nav class="mobile-menu" role="menu" id="mnav"></nav>
+  </header>
+
+  <main class="app cafe-page">
+    <header class="cafe-header">
+      <div class="cafe-title-wrap center">
+        <div class="cafe-title-line">
+          <h1 id="cafeTitle" class="cafe-title">Coffee spot</h1>
+          <button id="cafePhotosBtn" class="cafe-photo-trigger" type="button" aria-label="Open café photos" title="Photos">
+            📷
+          </button>
+        </div>
+
+        <p id="cafeSubtitle" class="cafe-subtitle"></p>
+
+        <div class="cafe-nav">
+          <button data-target="sec-about" class="cafe-nav-btn">About</button>
+          <button data-target="sec-location" class="cafe-nav-btn">Location</button>
+          <button data-target="sec-menu" class="cafe-nav-btn">Menu</button>
+          <button data-target="sec-products" class="cafe-nav-btn">Products used</button>
+          <button data-target="sec-review" class="cafe-nav-btn">Review</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="cafe-sections">
+      <article class="cafe-section" id="sec-about">
+        <h2>About</h2>
+        <p id="cafeAbout"></p>
+      </article>
+
+      <article class="cafe-section" id="sec-location">
+        <h2>Where to find us</h2>
+        <p id="cafeLocation"></p>
+        <p id="cafeHours" class="cafe-meta"></p>
+      </article>
+
+      <article class="cafe-section" id="sec-menu">
+        <h2>Our menu &amp; prices</h2>
+        <p id="cafeMenu"></p>
+      </article>
+
+      <article class="cafe-section" id="sec-products">
+        <h2>What products do we use and why?</h2>
+        <p id="cafeProducts"></p>
+      </article>
+
+      <article class="cafe-section cafe-review-section" id="sec-review">
+        <h2>If you visited us, leave a review :)</h2>
+
+        <div class="cafe-stars" aria-label="Rate this coffee spot">
+          <button type="button" class="star-btn" data-star="1">★</button>
+          <button type="button" class="star-btn" data-star="2">★</button>
+          <button type="button" class="star-btn" data-star="3">★</button>
+          <button type="button" class="star-btn" data-star="4">★</button>
+          <button type="button" class="star-btn" data-star="5">★</button>
+        </div>
+
+        <div class="guest-box" id="guestBox" hidden>
+          <label for="guestFirstName"><b>Prenume</b></label>
+          <input id="guestFirstName" type="text" placeholder="Ex: Alexandra" />
+
+          <label for="guestLastName" style="margin-top:10px;"><b>Nume</b></label>
+          <input id="guestLastName" type="text" placeholder="Ex: Roșca" />
+        </div>
+
+        <div class="receipt-box">
+          <label for="receiptNo"><b>Număr bon fiscal</b></label>
+          <input id="receiptNo" type="text" placeholder="Ex: 01-07.07.2026 / NR-ZZ.MM.YYYY" />
+
+          <label for="receiptItems" style="margin-top:10px;"><b>Produse achiziționate</b></label>
+          <input id="receiptItems" type="text" placeholder="Ex: Cappuccino, croissant, V60..." />
+
+          <small id="receiptHint" class="hint"></small>
+        </div>
+
+
+        <textarea id="reviewText" class="cafe-textarea"
+          placeholder="Tell us about your experience at this coffee spot..."></textarea>
+
+        <button id="reviewSubmit" class="chip cafe-submit" type="button" disabled>
+          Submit review ☕
+        </button>
+
+        <section id="cafeRecommendations" class="cafe-section cafe-recs" aria-live="polite" hidden>
+          <h2 class="cafe-section-title">Recommended for you</h2>
+          <p id="recsSubtitle" class="cafe-recs-subtitle">
+            Users who loved this place also loved:
+          </p>
+          <div id="recsList" class="recs-list"></div>
+        </section>
+      </article>
+    </section>
+  </main>
+
+  <a href="index.html" id="btnLogout" class="chip logout-desktop" style="display:none;">Log Out ⏻</a>
+  <div id="cafePhotosModal" class="photo-modal" hidden aria-hidden="true">
+    <div class="photo-modal-backdrop" data-photo-close></div>
+
+    <section class="photo-modal-card" role="dialog" aria-modal="true" aria-labelledby="photoModalTitle">
+      <button type="button" class="photo-modal-close" data-photo-close aria-label="Close photos">×</button>
+
+      <header class="photo-modal-head">
+        <span class="photo-modal-icon">📷</span>
+        <div>
+          <h2 id="photoModalTitle">Café photos</h2>
+          <p id="photoModalSubtitle">See photos uploaded by users.</p>
+        </div>
+      </header>
+
+      <div id="photoGuestNote" class="photo-note">
+        You can view photos as guest. Log in if you want to add a photo.
+      </div>
+
+      <form id="photoUploadForm" class="photo-upload-form">
+        <label for="photoFile"><b>Add a photo</b></label>
+        <input id="photoFile" type="file" accept="image/*" />
+
+        <label for="photoCaption"><b>Caption</b> <span class="muted">optional</span></label>
+        <input id="photoCaption" type="text" maxlength="255" placeholder="Ex: Cozy corner, cappuccino art..." />
+
+        <button id="photoUploadBtn" class="chip" type="submit">Upload photo</button>
+        <small id="photoUploadHint" class="hint"></small>
+      </form>
+
+      <div id="photoGrid" class="photo-grid" aria-live="polite"></div>
+    </section>
+  </div>
+</body>
+</html>

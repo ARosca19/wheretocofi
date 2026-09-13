@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WhereToCofi · Reviews</title>
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="config/config.js"></script>
+  <script defer src="js/storage.js"></script>
+  <script defer src="js/toast.js"></script>
+  <script defer src="js/api.js"></script>
+
+  <!-- UI -->
+  <script defer src="js/ui.auth.js"></script>
+  <script defer src="js/ui.menu.js"></script>
+
+  <!-- ADMIN (safe to have on all pages) -->
+  <script defer src="js/admin.dialog.js"></script>
+  <script defer src="js/admin.users.js"></script>
+  <script defer src="js/admin.cafes.js"></script>
+
+  <script defer src="js/features.search.js"></script>
+  <script defer src="js/features.slider.js"></script>
+  <script defer src="js/features.favorites.js"></script>
+  
+  <script defer src="js/main.js"></script>
+  <script defer src="reviews.js"></script>
+
+</head>
+
+<body class="js-loading reviews-page">
+  <!-- TOPBAR -->
+  <header class="topbar" role="banner">
+    <!-- STÂNGA: brand + acțiuni -->
+    <div class="topbar-left">
+      <a href="frame1.html" class="brand-inline" aria-label="WhereToCofi Home">
+        <svg class="coffee-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M17 8H5a1 1 0 0 0-1 1v2a5 5 0 0 0 5 5h4a5 5 0 0 0 5-5V9a1 1 0 0 0-1-1Z" />
+          <path d="M17 10h2a2 2 0 1 1 0 4h-2M7 18h10M9 6c0-1 .8-1.2.8-2S9 2 9 2m3 4c0-1 .8-1.2.8-2S12 2 12 2" />
+        </svg>
+        <span class="brand-small">↩ Home</span>
+      </a>
+
+      <div class="auth-inline">
+        <a href="#" id="btnMyCafecitos" class="chip" style="display:none;">My Cafecitos☕</a>
+        <a href="profile.html" id="btnProfile" class="chip" style="display:none;">My Profile👤</a>
+
+        <div class="admin-panel-wrapper">
+          <button id="btnAdminPanel" class="chip" style="display:none;">Admin panel ▾</button>
+          <div id="adminPanelMenu" class="admin-panel-menu">
+            <!-- USERS -->
+            <button type="button" class="admin-panel-item" data-action="admin-create">Create users</button>
+            <button type="button" class="admin-panel-item" data-action="admin-edit">Edit users</button>
+            <button type="button" class="admin-panel-item" data-action="admin-delete">Delete users</button>
+            <div class="admin-panel-separator"></div>
+            <!-- CAFES -->
+            <button type="button" class="admin-panel-item" data-action="admin-create-cafe">Create cafes</button>
+            <button type="button" class="admin-panel-item" data-action="admin-edit-cafe">Edit cafes</button>
+            <button type="button" class="admin-panel-item" data-action="admin-delete-cafe">Delete cafes</button>
+          </div>
+        </div>
+
+        <a href="#" id="btnLogin" class="chip">Log In</a>
+        <a href="#" id="btnSignup" class="chip">Sign Up</a>
+      </div>
+    </div>
+
+    <!-- CENTRU: salutul -->
+    <div class="topbar-center">
+      <span id="helloUser" class="hello-center"></span>
+    </div>
+
+    <!-- DREAPTA: Reviews / About / Contact -->
+    <nav class="topbar-right desktop-nav" id="desktopNav" aria-label="Main">
+      <a href="reviews.html" class="chip">Reviews☕</a>
+      <a href="about.html" class="chip">About☕☕</a>
+      <a href="contact.html" class="chip">Contact☕☕☕</a>
+    </nav>
+
+    <!-- Mobil: buton ⋮ + meniu derulant -->
+    <button class="menu-toggle dots-vertical" id="menuToggle" aria-label="Menu" aria-expanded="false"
+      aria-controls="mnav">
+      <span></span>
+    </button>
+    <nav class="mobile-menu" role="menu" id="mnav"></nav>
+  </header>
+
+  <!-- CONȚINUT PAGINĂ REVIEWS -->
+  <main class="app">
+    <section class="page-section">
+      <div class="page-title-row">
+
+        <button id="btnTopDrinksMobile" class="toprated-title-btn" type="button"
+                aria-label="Top ordered drinks" aria-expanded="false">
+          ☕
+        </button>
+        
+        <h1 class="page-title">Reviews</h1>
+
+        <!-- buton Top Rated (vizibil pe mobil / când vrei tu) -->
+        <button id="btnTopRatedMobile" class="toprated-title-btn" type="button"
+                aria-label="Top rated cafes" aria-expanded="false">
+          🏆
+        </button>
+      </div>
+      <p class="page-subtitle">
+        What do coffee lovers think about the cafés featured on WhereToCofi?
+      </p>
+
+      <!-- search în lista de reviews (ai deja CSS pentru astea) -->
+      <div class="reviews-search-wrap">
+        <input id="reviewsSearch" class="reviews-search-input" type="search"
+          placeholder="Search by product, cafe name, city or comment..." />
+      </div>
+
+      
+
+      
+      <!-- status + listă (folosite în reviews.js) -->
+      <p id="reviewsStatus">Loading reviews...</p>
+      <div id="reviewsList" class="reviews-list"></div>
+      <!-- ✅ TOP DRINKS (stânga desktop / modal mobil) -->
+      <aside id="topDrinksAside" class="top-drinks-float" aria-label="Top ordered drinks" aria-hidden="true">
+        <div class="topdrinks-backdrop" data-topdrinks-close></div>
+
+        <div class="topcard" role="dialog" aria-modal="true">
+          <div class="topcard-head">
+            <h3 class="topcard-title">☕ Top Ordered Drinks</h3>
+            <span class="topcard-pill" id="topdrinksInfo">Top 3</span>
+          </div>
+
+          
+
+          <p class="topcard-subtitle">Based on all reviews</p>
+
+          <ol class="topcafes-list" id="topDrinksList"></ol>
+
+          <p class="topcard-note" id="topdrinksNote" hidden>
+            Not enough data yet.
+          </p>
+        </div>
+      </aside>
+      <aside id="topRatedAside" class="top-rated-float" aria-label="Top rated cafes" aria-hidden="true">
+        <!-- fundal (click aici = close) -->
+        <div class="toprated-backdrop" data-toprated-close></div>
+
+        <div class="topcard" role="dialog" aria-modal="true">
+          <div class="topcard-head">
+            <h3 class="topcard-title">🏆 Top Rated Cafés</h3>
+            <span class="topcard-pill" id="topcafesInfo">Top 3</span>
+          </div>
+
+          <p class="topcard-subtitle">Based on all reviews</p>
+
+          <ol class="topcafes-list" id="topCafesList"></ol>
+
+          <p class="topcard-note" id="topcafesNote" hidden>
+            Not enough reviews yet to compute a fair ranking.
+          </p>
+        </div>
+      </aside>
+
+      <div id="sentimentAnalytics" class="sentiment-analytics-mini reviews-sentiment-fixed">
+        <div class="sentiment-head">
+          <h3>Review Sentiment Analysis</h3>
+          <span id="sentimentTotal" class="sentiment-total">ML overview</span>
+        </div>
+
+        <div class="sentiment-stats">
+          <div class="sentiment-box positive">
+            <div class="sentiment-label">😊 Positive</div>
+            <div id="sentimentPositive" class="sentiment-value">0%</div>
+          </div>
+
+          <div class="sentiment-box neutral">
+            <div class="sentiment-label">😐 Neutral</div>
+            <div id="sentimentNeutral" class="sentiment-value">0%</div>
+          </div>
+
+          <div class="sentiment-box negative">
+            <div class="sentiment-label">😞 Negative</div>
+            <div id="sentimentNegative" class="sentiment-value">0%</div>
+          </div>
+        </div>
+
+        <div class="sentiment-bar">
+          <div id="barPositive" class="bar-positive"></div>
+          <div id="barNeutral" class="bar-neutral"></div>
+          <div id="barNegative" class="bar-negative"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- buton logout plutitor (desktop) -->
+  <a href="index.html" id="btnLogout" class="chip logout-desktop" style="display:none;">Log Out ⏻</a>
+</body>
+
+</html>

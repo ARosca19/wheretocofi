@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WhereToCofi · Sign Up</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script defer src="config/config.js"></script>
+    <script defer src="js/storage.js"></script>
+    <script defer src="js/toast.js"></script>
+    <script defer src="js/api.js"></script>
+
+    <!-- opțional (dar recomandat) pentru UI consistent -->
+    <script defer src="js/ui.auth.js"></script>
+    <script defer src="js/ui.menu.js"></script>
+    <script defer src="auth.js?v=3"></script>
+</head>
+
+<body class="start-page">
+    <div class="start-container">
+        <a href="frame1.html" class="brand-inline" style="text-decoration: none; margin-bottom: 8px;">
+            <svg class="coffee-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17 8H5a1 1 0 0 0-1 1v2a5 5 0 0 0 5 5h4a5 5 0 0 0 5-5V9a1 1 0 0 0-1-1Z" />
+                <path d="M17 10h2a2 2 0 1 1 0 4h-2M7 18h10M9 6c0-1 .8-1.2.8-2S9 2 9 2m3 4c0-1 .8-1.2.8-2S12 2 12 2" />
+            </svg>
+            <span class="brand-small">WhereToCofi</span>
+        </a>
+
+        <h1 class="start-title">Create your cofi account</h1>
+        <p class="subtitle">Save your favorite spots and build your cafecitos list.</p>
+
+        <div class="admin-dialog auth-form">
+            <form id="signupForm" class="auth-form-body">
+                <h2 class="auth-title">Sign Up</h2>
+
+                <div class="auth-name-row">
+                    <label class="auth-field">
+                        <span>Prenume</span>
+                        <input type="text" id="su_prenume" required />
+                    </label>
+
+                    <label class="auth-field">
+                        <span>Nume</span>
+                        <input type="text" id="su_nume" required />
+                    </label>
+                </div>
+
+                <label class="auth-field">
+                    <span>Email</span>
+                    <input type="email" id="su_email" required />
+                </label>
+
+                <label class="auth-field">
+                    <span>Password</span>
+                    <input type="password" id="su_password" minlength="6" required />
+                </label>
+
+                <button type="submit" class="chip auth-submit">Create account</button>
+
+                <p id="signup_msg" class="auth-msg"></p>
+
+                <p class="auth-switch">
+                    Already have an account?
+                    <a href="login.html">Log in</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

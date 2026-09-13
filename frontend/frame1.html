@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WhereToCofi · All cafecitos</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script defer src="config/config.js"></script>
+
+  <script defer src="js/storage.js"></script>
+  <script defer src="js/toast.js"></script>
+  <script defer src="js/api.js"></script>
+
+  <script defer src="js/ui.auth.js"></script>
+  <script defer src="js/ui.menu.js"></script>
+
+  <script defer src="js/admin.dialog.js"></script>
+  <script defer src="js/admin.users.js"></script>
+  <script defer src="js/admin.cafes.js"></script>
+
+  <script defer src="js/features.search.js"></script>
+  <script defer src="js/features.slider.js"></script>
+  <script defer src="js/features.favorites.js"></script>
+
+  <script defer src="js/main.js"></script>
+  <script defer src="js/ai-popup.js"></script>
+
+</head>
+
+<body class="js-loading">
+  <header class="topbar" role="banner">
+    <!-- STÂNGA: brand + acțiuni context -->
+    <div class="topbar-left">
+      <a href="index.html" class="brand-inline" aria-label="WhereToCofi Home">
+        <svg class="coffee-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M17 8H5a1 1 0 0 0-1 1v2a5 5 0 0 0 5 5h4a5 5 0 0 0 5-5V9a1 1 0 0 0-1-1Z" />
+          <path d="M17 10h2a2 2 0 1 1 0 4h-2M7 18h10M9 6c0-1 .8-1.2.8-2S9 2 9 2m3 4c0-1 .8-1.2.8-2S12 2 12 2" />
+        </svg>
+        <span class="brand-small">WhereToCofi</span>
+      </a>
+
+      <!-- stânga desktop: My Cafecitos + Admin panel + login/signup -->
+      <div class="auth-inline">
+        <a href="#" id="btnMyCafecitos" class="chip" style="display:none;">My Cafecitos☕</a>
+        <a href="profile.html" id="btnProfile" class="chip" style="display:none;">My Profile👤</a>
+
+
+        <div class="admin-panel-wrapper">
+          <button id="btnAdminPanel" class="chip" style="display:none;">Admin panel ▾</button>
+          <div id="adminPanelMenu" class="admin-panel-menu">
+            <!-- USERS -->
+            <button type="button" class="admin-panel-item" data-action="admin-create">Create users</button>
+            <button type="button" class="admin-panel-item" data-action="admin-edit">Edit users</button>
+            <button type="button" class="admin-panel-item" data-action="admin-delete">Delete users</button>
+
+            <div class="admin-panel-separator"></div>
+
+            <!-- CAFES -->
+            <button type="button" class="admin-panel-item" data-action="admin-create-cafe">Create cafes</button>
+            <button type="button" class="admin-panel-item" data-action="admin-edit-cafe">Edit cafes</button>
+            <button type="button" class="admin-panel-item" data-action="admin-delete-cafe">Delete cafes</button>
+          </div>
+        </div>
+
+        <a href="#" id="btnLogin" class="chip">Log In</a>
+        <a href="#" id="btnSignup" class="chip">Sign Up</a>
+      </div>
+    </div> <!-- <<=== AICI se închide topbar-left -->
+
+    <!-- CENTRU: salutul -->
+    <div class="topbar-center">
+      <span id="helloUser" class="hello-center"></span>
+    </div>
+
+    <!-- DREAPTA: Reviews / About / Contact (guest pe desktop) -->
+    <nav class="topbar-right desktop-nav" id="desktopNav" aria-label="Main">
+      <a href="reviews.html" class="chip">Reviews☕</a>
+      <a href="about.html" class="chip">About☕☕</a>
+      <a href="contact.html" class="chip">Contact☕☕☕</a>
+    </nav>
+
+    <!-- Mobil: buton ⋮ + meniu derulant -->
+    <button class="menu-toggle dots-vertical" id="menuToggle" aria-label="Menu" aria-expanded="false"
+      aria-controls="mnav">
+      <span></span>
+    </button>
+    <nav class="mobile-menu" role="menu" id="mnav"></nav>
+  </header>
+
+  <main class="app" id="app">
+    <h1 class="brand">You me cofi today?</h1>
+
+    <div class="search-bar">
+      <input id="search" class="search-input" type="search" placeholder="Search for a coffee shop or location" />
+    </div>
+
+    <section class="hero" aria-label="Featured">
+      <div class="slider" id="heroSlider" aria-roledescription="carousel">
+        <div class="slides">
+          <div class="slide is-active">
+            <img src="assets/ceaicoffski6.jpg" alt="Ceaicoffski poza1 locatie ParkLake">
+          </div>
+          <div class="slide">
+            <img src="assets/The-Italian-Vintage-Shop.jpg" alt="Italian Vintage poza1 interior">
+          </div>
+          <div class="slide">
+            <img src="assets/unnamed.webp" alt="Sotto poza1 aparat de cafea">
+          </div>
+          <div class="slide">
+            <img src="assets/ulu-coffee-house-1.jpeg" alt="Ulu poza1 outside">
+          </div>
+          <div class="slide">
+            <img src="assets/freya1.jpg" alt="Freya1">
+          </div>
+          <div class="slide">
+            <img src="assets/BOB_03-1200x801.jpeg" alt="Bob1">
+          </div>
+        </div>
+
+        <button class="nav prev" aria-label="Previous Slide"></button>
+        <button class="nav next" aria-label="Next Slide"></button>
+
+        <ul class="dots" id="heroDots" aria-label="Choose slide"></ul>
+      </div>
+    </section>
+
+    <section class="cards" id="cards">
+      <a class="card" href="cafe.html?id=ceaicoffski" data-slug="ceaicoffski" data-name="Ceaicoffski"
+        data-area="Bucharest" data-tags="specialty, cozy">
+
+        <div class="card-header">
+          <div class="title">Ceaicoffski</div>
+          <button class="fav-btn" type="button" aria-label="Save to My Cafecitos">
+            <span class="heart">♡</span>
+            <img src="assets/hot-beverage_3d.png" class="coffee-3d" alt="">
+          </button>
+        </div>
+
+        <div class="row">
+          <div class="meta">București · Calm</div>
+          <div class="more">More info <span class="arrow">›</span></div>
+        </div>
+      </a>
+
+      <a class="card" href="cafe.html?id=ivcs" data-slug="ivcs" data-name="Italian Vintage Coffee Shop"
+        data-area="Bucharest" data-tags="italian">
+
+        <div class="card-header">
+          <div class="title">Italian Vintage Coffee Shop</div>
+          <button class="fav-btn" type="button" aria-label="Save to My Cafecitos">
+            <span class="heart">♡</span>
+            <img src="assets/hot-beverage_3d.png" class="coffee-3d" alt="">
+          </button>
+        </div>
+
+        <div class="row">
+          <div class="meta">București · Vintage & Italian Vibes</div>
+          <div class="more">More info <span class="arrow">›</span></div>
+        </div>
+      </a>
+
+      <a class="card" href="cafe.html?id=sotto" data-slug="sotto" data-name="Sotto" data-area="Bucharest"
+        data-tags="minimal">
+
+        <div class="card-header">
+          <div class="title">Sotto</div>
+          <button class="fav-btn" type="button" aria-label="Save to My Cafecitos">
+            <span class="heart">♡</span>
+            <img src="assets/hot-beverage_3d.png" class="coffee-3d" alt="">
+          </button>
+        </div>
+
+        <div class="row">
+          <div class="meta">București · Cozy</div>
+          <div class="more">More info <span class="arrow">›</span></div>
+        </div>
+      </a>
+
+      <a class="card" href="cafe.html?id=ulu" data-slug="ulu" data-name="ULU Coffee Shop" data-area="Bucharest"
+        data-tags="Chilling">
+
+        <div class="card-header">
+          <div class="title">ULU Coffee House</div>
+          <button class="fav-btn" type="button" aria-label="Save to My Cafecitos">
+            <span class="heart">♡</span>
+            <img src="assets/hot-beverage_3d.png" class="coffee-3d" alt="">
+          </button>
+        </div>
+
+        <div class="row">
+          <div class="meta">București · Chilling</div>
+          <div class="more">More info <span class="arrow">›</span></div>
+        </div>
+      </a>
+
+      <a class="card" href="cafe.html?id=freya-and-friends" data-slug="freya-and-friends" data-name="Freya and Friends"
+        data-area="Brasov" data-tags="family">
+
+        <div class="card-header">
+          <div class="title">Freya and Friends</div>
+          <button class="fav-btn" type="button" aria-label="Save to My Cafecitos">
+            <span class="heart">♡</span>
+            <img src="assets/hot-beverage_3d.png" class="coffee-3d" alt="">
+          </button>
+        </div>
+
+        <div class="row">
+          <div class="meta">Brasov · Family</div>
+          <div class="more">More info <span class="arrow">›</span></div>
+        </div>
+      </a>
+
+      <a class="card" href="cafe.html?id=bob-coffee-lab" data-slug="bob-coffee-lab" data-name="BOB Coffee Lab"
+        data-area="București" data-tags="minimal">
+
+        <div class="card-header">
+          <div class="title">BOB Coffee Lab</div>
+          <button class="fav-btn" type="button" aria-label="Save to My Cafecitos">
+            <span class="heart">♡</span>
+            <img src="assets/hot-beverage_3d.png" class="coffee-3d" alt="">
+          </button>
+        </div>
+
+        <div class="row">
+          <div class="meta">București · Cozy & Minimal</div>
+          <div class="more">More info <span class="arrow">›</span></div>
+        </div>
+      </a>
+
+    </section>
+  </main>
+  
+  <a href="index.html" id="btnLogout" class="chip logout-desktop" style="display:none;">Log Out ⏻</a>
+
+  <button id="btnAI" class="chip ai-floating ai-mobile-orb" type="button" style="display:none;" aria-label="Open AI coffee assistant">
+    <span class="ai-orb-icon" aria-hidden="true">
+      <img src="assets/ai-robot-coffee.png" alt="" class="ai-robot-img">
+    </span>
+
+    <span class="ai-orb-label">Your AI Coffee Assistant</span>
+    <span class="ai-orb-bubble" aria-hidden="true">Your AI coffee assistant</span>
+  </button>
+
+  <div id="aiPopup" class="ai-popup" hidden>
+    <div class="ai-popup-backdrop" id="aiPopupBackdrop"></div>
+
+    <section class="ai-popup-card" role="dialog" aria-modal="true">
+      <button id="aiPopupClose" class="ai-popup-close" type="button">×</button>
+
+      <div class="ai-popup-head">
+        <div>
+          <h2>AI Coffee Assistant✨</h2>
+          <p>I am your coffee assistant. Ask me about coffee, ingredients or cafés — I use real reviews and data from the app to suggest the best options for you.</p>
+        </div>
+      </div>
+
+      <div id="aiChatMessages" class="ai-chat-messages">
+        <div class="ai-message ai-message-bot">
+          <strong>Hello!</strong><br><br>
+
+          I use real café data and user reviews to help you choose better.<br><br>
+
+          Try asking:<br>
+          • Where can I find a good cappuccino?<br>
+          • What is a stronger coffee?<br>
+          • Which cafés have matcha?<br>
+          • What should I drink in the evening?
+        </div>
+              </div>
+
+      <form id="aiChatForm" class="ai-chat-form">
+        <input
+          id="aiChatInput"
+          type="text"
+          placeholder="Example: Where can I drink a stronger coffee?"
+          autocomplete="off"
+        />
+        <button type="submit">Ask</button>
+      </form>
+    </section>
+  </div>
+</body>
+
+</html>

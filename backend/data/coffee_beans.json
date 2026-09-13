@@ -1,0 +1,68 @@
+{
+  "beans": [
+    {
+      "name": "arabica",
+      "scientific_name": "Coffea arabica",
+      "category": "coffee_species",
+      "description": "Arabica is one of the most widely used coffee species and is often associated with specialty coffee. It is generally considered smoother, more aromatic and more complex than robusta.",
+      "taste_profile": ["smooth", "fruity", "floral", "sweet", "acidic", "aromatic"],
+      "caffeine_level": "medium",
+      "body": "light-medium",
+      "bitterness": "low-medium",
+      "quality_perception": "high",
+      "common_use": ["specialty coffee", "espresso", "filter coffee", "v60", "batch brew"],
+      "recommended_for": ["balanced taste", "fruity coffee", "specialty coffee", "beginners"],
+      "not_recommended_for": ["very bitter coffee lovers", "maximum caffeine seekers"],
+      "health_note": "Arabica usually has less caffeine than robusta, but it still contains caffeine and should be consumed moderately.",
+      "ai_note": "Recommend arabica when the user asks for smooth, fruity, aromatic or specialty coffee."
+    },
+    {
+      "name": "robusta",
+      "scientific_name": "Coffea canephora",
+      "category": "coffee_species",
+      "description": "Robusta is known for a stronger, more bitter and more earthy taste. It is often used in espresso blends, commercial coffee and instant coffee because it gives intensity and crema.",
+      "taste_profile": ["strong", "bitter", "earthy", "woody", "bold"],
+      "caffeine_level": "high",
+      "body": "heavy",
+      "bitterness": "high",
+      "quality_perception": "commercial-medium",
+      "common_use": ["espresso blends", "instant coffee", "commercial coffee", "strong coffee"],
+      "recommended_for": ["strong coffee", "high caffeine", "bold taste", "espresso crema"],
+      "not_recommended_for": ["mild coffee lovers", "fruity coffee lovers"],
+      "health_note": "Robusta generally has more caffeine than arabica, so it may not be ideal late in the evening or for caffeine-sensitive users.",
+      "ai_note": "Recommend robusta when the user asks for strong coffee, high caffeine or bitter taste."
+    },
+    {
+      "name": "liberica",
+      "scientific_name": "Coffea liberica",
+      "category": "coffee_species",
+      "description": "Liberica is a rarer coffee species with a distinctive profile. It can have woody, smoky and sometimes fruity notes, but it is not as common as arabica or robusta.",
+      "taste_profile": ["woody", "smoky", "fruity", "unusual", "bold"],
+      "caffeine_level": "medium",
+      "body": "medium-heavy",
+      "bitterness": "medium",
+      "quality_perception": "rare",
+      "common_use": ["regional coffee", "specialty experiments", "blends"],
+      "recommended_for": ["curious coffee drinkers", "rare coffee", "unusual taste"],
+      "not_recommended_for": ["classic coffee taste only"],
+      "health_note": "Liberica still contains caffeine, but its exact caffeine level depends on variety, roast and preparation.",
+      "ai_note": "Mention liberica when the user asks about rare coffee species or unusual taste profiles."
+    },
+    {
+      "name": "excelsa",
+      "scientific_name": "Coffea liberica var. dewevrei",
+      "category": "coffee_species",
+      "description": "Excelsa is often discussed separately because of its tart, fruity and complex taste. It is less common and may appear in blends or regional coffees.",
+      "taste_profile": ["tart", "fruity", "complex", "bright", "wine-like"],
+      "caffeine_level": "medium",
+      "body": "medium",
+      "bitterness": "medium",
+      "quality_perception": "rare",
+      "common_use": ["blends", "regional coffee", "specialty experiments"],
+      "recommended_for": ["fruity coffee", "complex taste", "rare coffee"],
+      "not_recommended_for": ["simple classic coffee only"],
+      "health_note": "Excelsa contains caffeine, so moderation is still recommended.",
+      "ai_note": "Use excelsa when explaining uncommon coffee species and fruity, complex profiles."
+    }
+  ]
+}

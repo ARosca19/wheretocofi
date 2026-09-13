@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WhereToCofi · Contact</title>
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <script defer src="config/config.js"></script>
+  <script defer src="js/storage.js"></script>
+  <script defer src="js/toast.js"></script>
+  <script defer src="js/api.js"></script>
+
+  <script defer src="js/ui.auth.js"></script>
+  <script defer src="js/ui.menu.js"></script>
+
+  <script defer src="js/admin.dialog.js"></script>
+  <script defer src="js/admin.users.js"></script>
+  <script defer src="js/admin.cafes.js"></script>
+
+  <script defer src="js/main.js"></script>
+  <script defer src="contact.js"></script>
+</head>
+
+<body class="js-loading">
+  <header class="topbar" role="banner">
+    <div class="topbar-left">
+      <a href="frame1.html" class="brand-inline" aria-label="WhereToCofi Home">
+        <svg class="coffee-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M17 8H5a1 1 0 0 0-1 1v2a5 5 0 0 0 5 5h4a5 5 0 0 0 5-5V9a1 1 0 0 0-1-1Z" />
+          <path d="M17 10h2a2 2 0 1 1 0 4h-2M7 18h10M9 6c0-1 .8-1.2.8-2S9 2 9 2m3 4c0-1 .8-1.2.8-2S12 2 12 2" />
+        </svg>
+        <span class="brand-small">↩ Home</span>
+      </a>
+
+      <div class="auth-inline">
+        <a href="#" id="btnMyCafecitos" class="chip" style="display:none;">My Cafecitos☕</a>
+
+        <div class="admin-panel-wrapper">
+          <button id="btnAdminPanel" class="chip" style="display:none;">Admin panel ▾</button>
+          <div id="adminPanelMenu" class="admin-panel-menu">
+            <button type="button" class="admin-panel-item" data-action="admin-create">Create users</button>
+            <button type="button" class="admin-panel-item" data-action="admin-edit">Edit users</button>
+            <button type="button" class="admin-panel-item" data-action="admin-delete">Delete users</button>
+
+            <div class="admin-panel-separator"></div>
+
+            <button type="button" class="admin-panel-item" data-action="admin-create-cafe">Create cafes</button>
+            <button type="button" class="admin-panel-item" data-action="admin-edit-cafe">Edit cafes</button>
+            <button type="button" class="admin-panel-item" data-action="admin-delete-cafe">Delete cafes</button>
+          </div>
+        </div>
+
+        <a href="#" id="btnLogin" class="chip">Log In</a>
+        <a href="#" id="btnSignup" class="chip">Sign Up</a>
+      </div>
+    </div>
+
+    <div class="topbar-center">
+      <span id="helloUser" class="hello-center"></span>
+    </div>
+
+    <nav class="topbar-right desktop-nav" id="desktopNav" aria-label="Main">
+      <a href="reviews.html" class="chip">Reviews☕</a>
+      <a href="about.html" class="chip">About☕☕</a>
+      <a href="contact.html" class="chip is-active">Contact☕☕☕</a>
+    </nav>
+
+    <button class="menu-toggle dots-vertical" id="menuToggle" aria-label="Menu" aria-expanded="false" aria-controls="mnav">
+      <span></span>
+    </button>
+    <nav class="mobile-menu" role="menu" id="mnav"></nav>
+  </header>
+
+  <main class="app contact-page">
+    <section class="page-section">
+      <h1 class="page-title">Contact</h1>
+      <p class="page-subtitle">
+        For café recommendations, app feedback, or account-related concerns, feel free to reach out using the information below.
+      </p>
+
+      <div class="contact-cards">
+
+        <details class="contact-slide contact-slide--hero">
+          <summary class="contact-slide__head">
+            <span class="contact-slide__icon">💌</span>
+            <span class="contact-slide__title" data-contact-translate>Contact details</span>
+            <span class="contact-slide__chev">▾</span>
+          </summary>
+
+          <div class="contact-slide__body">
+            <div class="contact-slide__content">
+              <ul class="contact-kv">
+                <li><strong>Instagram:</strong> <a class="contact-link">@ros_kiss</a></li>
+                <li><strong>Phone:</strong> <a class="contact-link">+40 721 233 362</a></li>
+                <li><strong>Email:</strong> <a class="contact-link" href="mailto:alexandra.rosca1907@gmail.com">alexandra.rosca1907@gmail.com</a></li>
+              </ul>
+              <p class="contact-note" data-contact-translate>
+                I reply as quickly as I can. If it is a bug, a screenshot and a short explanation of what you did before it appeared helps a lot.
+              </p>
+            </div>
+          </div>
+        </details>
+
+        <details class="contact-slide">
+          <summary class="contact-slide__head">
+            <span class="contact-slide__icon">✅</span>
+            <span class="contact-slide__title" data-contact-translate>When you can contact me</span>
+            <span class="contact-slide__chev">▾</span>
+          </summary>
+
+          <div class="contact-slide__body">
+            <div class="contact-slide__content">
+              <ul>
+                <li data-contact-translate>you have a café recommendation that deserves to be added to WhereToCofi;</li>
+                <li data-contact-translate>you found a problem in the application, such as a bug, an error, or something displayed incorrectly;</li>
+                <li data-contact-translate>you have difficulties with authentication or with your account;</li>
+                <li data-contact-translate>you want to share feedback about how the application can be improved;</li>
+                <li data-contact-translate>you represent a café and want it to appear in the application.</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <details class="contact-slide contact-slide--thanks">
+          <summary class="contact-slide__head">
+            <span class="contact-slide__icon">🧁</span>
+            <span class="contact-slide__title" data-contact-translate>Tip</span>
+            <span class="contact-slide__chev">▾</span>
+          </summary>
+
+          <div class="contact-slide__body">
+            <div class="contact-slide__content">
+              <p data-contact-translate>
+                If you write to me about a new café, include the city, a link such as Google Maps or Instagram, and one or two sentences about the place. Thank you!
+              </p>
+            </div>
+          </div>
+        </details>
+
+        <div class="about-actions-bottom">
+          <button id="contactTranslateBtn" class="chip about-translate-btn">
+            Translate to Romanian
+          </button>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <a href="index.html" id="btnLogout" class="chip logout-desktop" style="display:none;">Log Out ⏻</a>
+</body>
+
+</html>

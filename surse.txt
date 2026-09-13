@@ -1,0 +1,61 @@
+~ icon coffee
+https://lucide.dev/icons/coffee
+https://feathericons.com/?query=coffee
+
+~ interface inspo
+TripAdvispor
+Kiwi trips 
+
+~ Tehnologii folosite:
+-Frontend
+HTML, CSS, JavaScript
+-Backend
+Python + librarii: 
+
+~ requirements.txt
+-pachetele de instalare pentru ca aplicatia sa functioneze care se instaleaza o singura data fara instalare manuala
+
+~ .env
+-baza de date wheretocofi.db se creeaza automat la fiecare sign up validat, iar tabela cafegii este adaugata in tabela conform clasei Cafegii din main
+-fiecare camp din env reprezinta variabilele de configurare:
+
+DATABASE_URL=sqlite:///wheretocofi.db 
+SECRET_KEY=schimba-asta-cu-ceva-lung-si-random ===== semnarea jwt-ului 
+ALGORITHM=HS256 ===== metoda de expirare a tokenului json ; creează o semnătură unică din token și SECRET_KEY, folosind algoritmul SHA-256
+ACCESS_TOKEN_EXPIRE_MINUTES=60 ===== dupa cate secunde esti delogat
+CORS_ORIGINS=http://127.0.0.1:5500,http://localhost:5500 ===== momentan aplica ruleaza local si de aceea nu folosim https
+
+
+~ main.py
+- database setup:
+    create_engine creeaza conexiunea cu baza de date iar pool_ping verifica daca conexiunea este mereu activa si daca nu este o reface
+    sessionmaker creeaza un obiect care trimte comenzi specifice sql si trimite datele la conexiunea din create_engine
+    base este clasa principala din care vor mosteni toae celelalte tabele
+
+    1️⃣ engine → se conectează la fișierul wheretocofi.db.
+    2️⃣ Base → definește structura tabelelor.
+    3️⃣ SessionLocal → permite să inserezi, modifici și citești date.
+
+    definim tabela cafegii cu campurile specifice
+
+- helpers
+Funcție	                    Rol
+get_db()	                deschide și închide conexiunea la baza de date pentru fiecare cerere
+hash_password()	            transformă parola în cod sigur (hash)
+verify_password()	        verifică parola introdusă cu cea stocată (hash)
+create_access_token()	    generează token JWT pentru autentificare
+decode_token()	            verifică și decodează tokenul JWT (extrage id-ul userului)
+
+
+-pentru a vedea baza de date instalam sqlite viewer
+
+- pentru a vedea ca merge intram in folderul server, activam venv 
+.\venv\Scripts\activate
+uvicorn main:app --reload
+
+- rulare de pe alt device:
+uvicorn main:app --host 0.0.0.0 --port 8000
+http://IP-ul-tău-local:8000
+
+- baza de date cu admin seed 
+daca nu exista adminul il creeaza automat

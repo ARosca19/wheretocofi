@@ -1,0 +1,64 @@
+{
+  "rules": [
+    {
+      "intent": "strong_coffee",
+      "description": "Used when the user asks for a strong, intense or high-caffeine coffee.",
+      "keywords": ["tare", "puternica", "puternică", "intens", "intensa", "energie", "strong", "intense", "high caffeine"],
+      "recommended_drinks": ["espresso", "ristretto", "macchiato", "v60", "cold brew", "turkish coffee"],
+      "recommended_methods": ["espresso", "v60", "turkish coffee", "cold brew"],
+      "avoid_drinks": ["latte", "chai latte"],
+      "explanation_ro": "Pentru cafea mai tare, sunt potrivite băuturile concentrate sau metodele care evidențiază intensitatea.",
+      "explanation_en": "For stronger coffee, concentrated drinks or methods that highlight intensity are better.",
+      "health_note_ro": "Dacă ești sensibil(ă) la cofeină, evită cafeaua tare seara târziu.",
+      "health_note_en": "If you are sensitive to caffeine, avoid strong coffee late in the evening."
+    },
+    {
+      "intent": "evening",
+      "description": "Used when the user asks what coffee is better in the evening or at night.",
+      "keywords": ["seara", "noaptea", "tarziu", "târziu", "evening", "night"],
+      "recommended_drinks": ["chai latte", "matcha", "latte", "cappuccino"],
+      "recommended_methods": [],
+      "avoid_drinks": ["espresso", "ristretto", "cold brew", "turkish coffee"],
+      "explanation_ro": "Seara sunt mai potrivite băuturile mai blânde sau cu nivel mai redus de cofeină.",
+      "explanation_en": "In the evening, milder drinks or drinks with lower caffeine are usually better.",
+      "health_note_ro": "Evită băuturile cu cofeină ridicată dacă ai probleme cu somnul.",
+      "health_note_en": "Avoid high-caffeine drinks if you have trouble sleeping."
+    },
+    {
+      "intent": "milk_based",
+      "description": "Used when the user asks for creamy drinks or drinks with milk.",
+      "keywords": ["lapte", "cremos", "cremoasa", "cremoasă", "milk", "creamy"],
+      "recommended_drinks": ["cappuccino", "latte", "flat white", "cortado", "mocha"],
+      "recommended_methods": ["espresso"],
+      "avoid_drinks": ["v60", "batch brew", "americano"],
+      "explanation_ro": "Pentru băuturi cremoase, variantele pe bază de espresso și lapte sunt cele mai potrivite.",
+      "explanation_en": "For creamy drinks, espresso-based drinks with milk are usually the best choice.",
+      "health_note_ro": "Dacă eviți lactoza, caută variante cu lapte vegetal.",
+      "health_note_en": "If you avoid lactose, look for plant-based milk options."
+    },
+    {
+      "intent": "cold_drink",
+      "description": "Used when the user asks for cold or refreshing coffee.",
+      "keywords": ["rece", "gheata", "gheață", "iced", "cold", "vara", "summer"],
+      "recommended_drinks": ["cold brew", "iced latte", "iced americano", "affogato"],
+      "recommended_methods": ["cold brew"],
+      "avoid_drinks": ["turkish coffee"],
+      "explanation_ro": "Pentru zile calde, băuturile reci sunt mai potrivite și mai ușor de băut.",
+      "explanation_en": "For hot days, cold drinks are usually more refreshing and easier to drink.",
+      "health_note_ro": "Băuturile reci pot avea totuși cofeină multă, mai ales cold brew.",
+      "health_note_en": "Cold drinks can still contain a lot of caffeine, especially cold brew."
+    },
+    {
+      "intent": "no_milk",
+      "description": "Used when the user asks for coffee without milk or black coffee.",
+      "keywords": ["fara lapte", "fără lapte", "black coffee", "no milk"],
+      "recommended_drinks": ["espresso", "americano", "v60", "batch brew", "cold brew"],
+      "recommended_methods": ["espresso", "v60", "batch brew", "cold brew"],
+      "avoid_drinks": ["latte", "cappuccino", "flat white", "cortado", "mocha"],
+      "explanation_ro": "Pentru cafea fără lapte, cele mai potrivite sunt espresso, americano și cafelele filtrate.",
+      "explanation_en": "For coffee without milk, espresso, americano and filter coffees are usually best.",
+      "health_note_ro": "Cafeaua fără lapte poate părea mai acidă sau mai intensă, în funcție de metodă.",
+      "health_note_en": "Black coffee may feel more acidic or intense depending on the method."
+    }
+  ]
+}

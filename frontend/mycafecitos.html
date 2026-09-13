@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WhereToCofi · My cafecitos</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script defer src="config/config.js"></script>
+    <script defer src="js/storage.js"></script>
+    <script defer src="js/toast.js"></script>
+    <script defer src="js/api.js"></script>
+
+    <script defer src="js/ui.auth.js"></script>
+    <script defer src="js/ui.menu.js"></script>
+
+    <!-- dacă vrei admin dropdown și aici -->
+    <script defer src="js/admin.dialog.js"></script>
+    <script defer src="js/admin.users.js"></script>
+    <script defer src="js/admin.cafes.js"></script>
+
+    <script defer src="js/features.search.js"></script>
+  <script defer src="js/features.slider.js"></script>
+  <script defer src="js/features.favorites.js"></script>
+
+    <!-- pagina ta (încă e în root-ul frontend) -->
+    <script defer src="mycafecitos.js"></script>
+    <script defer src="js/main.js"></script>
+    
+
+</head>
+
+<body class="js-loading">
+    <!-- TOPBAR -->
+    <header class="topbar" role="banner">
+        <!-- STÂNGA: brand + acțiuni -->
+        <div class="topbar-left">
+            <a href="frame1.html" class="brand-inline" aria-label="WhereToCofi Home">
+                <svg class="coffee-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M17 8H5a1 1 0 0 0-1 1v2a5 5 0 0 0 5 5h4a5 5 0 0 0 5-5V9a1 1 0 0 0-1-1Z" />
+                    <path
+                        d="M17 10h2a2 2 0 1 1 0 4h-2M7 18h10M9 6c0-1 .8-1.2.8-2S9 2 9 2m3 4c0-1 .8-1.2.8-2S12 2 12 2" />
+                </svg>
+                <span class="brand-small">↩ Home</span>
+            </a>
+
+            <div class="auth-inline">
+                <a href="#" id="btnMyCafecitos" class="chip" style="display:none;">My Cafecitos☕</a>
+                <a href="profile.html" id="btnProfile" class="chip" style="display:none;">My Profile👤</a>
+
+                <div class="admin-panel-wrapper">
+                    <button id="btnAdminPanel" class="chip" style="display:none;">Admin panel ▾</button>
+                    <div id="adminPanelMenu" class="admin-panel-menu">
+                        <!-- USERS -->
+                        <button type="button" class="admin-panel-item" data-action="admin-create">Create users</button>
+                        <button type="button" class="admin-panel-item" data-action="admin-edit">Edit users</button>
+                        <button type="button" class="admin-panel-item" data-action="admin-delete">Delete users</button>
+                        <div class="admin-panel-separator"></div>
+                        <!-- CAFES -->
+                        <button type="button" class="admin-panel-item" data-action="admin-create-cafe">Create
+                            cafes</button>
+                        <button type="button" class="admin-panel-item" data-action="admin-edit-cafe">Edit cafes</button>
+                        <button type="button" class="admin-panel-item" data-action="admin-delete-cafe">Delete
+                            cafes</button>
+                    </div>
+                </div>
+
+                <a href="#" id="btnLogin" class="chip">Log In</a>
+                <a href="#" id="btnSignup" class="chip">Sign Up</a>
+            </div>
+        </div>
+
+        <!-- CENTRU: salutul -->
+        <div class="topbar-center">
+            <span id="helloUser" class="hello-center"></span>
+        </div>
+
+        <!-- DREAPTA: Reviews / About / Contact -->
+        <nav class="topbar-right desktop-nav" id="desktopNav" aria-label="Main">
+            <a href="reviews.html" class="chip">Reviews☕</a>
+            <a href="about.html" class="chip">About☕☕</a>
+            <a href="contact.html" class="chip">Contact☕☕☕</a>
+        </nav>
+
+        <!-- Mobil: buton ⋮ + meniu derulant -->
+        <button class="menu-toggle dots-vertical" id="menuToggle" aria-label="Menu" aria-expanded="false"
+            aria-controls="mnav">
+            <span></span>
+        </button>
+        <nav class="mobile-menu" role="menu" id="mnav"></nav>
+    </header>
+
+    <main class="app mycafecitos-page">
+    <section class="page-section mycafecitos-head">
+        <h1 class="page-title mycafecitos-title">My Cafecitos</h1>
+        <p class="page-subtitle mycafecitos-subtitle">
+            Your saved coffee spots, all in one place.
+        </p>
+    </section>
+
+    <section id="favSection" class="fav-section fav-section-modern">
+        <div class="mycafecitos-shell">
+            <div class="mycafecitos-shell-head">
+                <div>
+                    <h2 class="mycafecitos-shell-title">Saved cafés</h2>
+                    <p class="mycafecitos-shell-subtitle">Tap a card to open the coffee spot page.</p>
+                </div>
+
+                <div class="mycafecitos-shell-badge">☕ Favorites</div>
+            </div>
+
+            <p id="favEmpty" class="empty-msg mycafecitos-empty" style="display: none;">
+                You don’t have any saved coffee spots yet. Go to the main page and tap the ♥ on your favourites.
+            </p>
+
+            <div id="favCards" class="cards mycafecitos-cards"></div>
+        </div>
+    </section>
+</main>
+    <a href="index.html" id="btnLogout" class="chip logout-desktop" style="display:none;">Log Out ⏻</a>
+
+</body>
+
+</html>
