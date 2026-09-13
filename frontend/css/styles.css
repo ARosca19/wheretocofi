@@ -1317,6 +1317,7 @@ body.js-loading #menuToggle {
 
 /* carduri în ton cu My Profile */
 .fav-section-modern .card.fav-card{
+  position:relative;
   background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
   color:#1f2430;
   border:1px solid #dbe4f2;
@@ -1324,6 +1325,64 @@ body.js-loading #menuToggle {
   padding:18px 18px;
   box-shadow:0 8px 18px rgba(31, 36, 48, 0.05);
   transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.fav-section-modern .fav-card-link{
+  display:block;
+  color:inherit;
+  text-decoration:none;
+}
+
+.fav-section-modern .visit-check{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:36px;
+  height:36px;
+  display:grid;
+  place-items:center;
+  border:2px solid #aeb8c8;
+  border-radius:50%;
+  background:#fff;
+  color:transparent;
+  font-size:1.15rem;
+  font-weight:800;
+  line-height:1;
+  cursor:pointer;
+  transition:background .18s ease, border-color .18s ease, color .18s ease, transform .18s ease;
+}
+
+.fav-section-modern .visit-check:hover{
+  border-color:#2f72d6;
+  transform:scale(1.06);
+}
+
+.fav-section-modern .visit-check:focus-visible{
+  outline:3px solid rgba(47, 114, 214, .25);
+  outline-offset:3px;
+}
+
+.fav-section-modern .fav-card.is-visited{
+  border-color:#9dcfb0;
+  background:#f3fbf5;
+}
+
+.fav-section-modern .fav-card.is-visited .visit-check{
+  border-color:#25834a;
+  background:#25834a;
+  color:#fff;
+}
+
+.fav-section-modern .fav-card.is-visited .title{
+  color:#356a48;
+}
+
+.fav-section-modern .fav-card.is-updating{
+  opacity:.65;
+}
+
+.fav-section-modern .visit-check:disabled{
+  cursor:wait;
 }
 
 .fav-section-modern .card.fav-card:nth-child(2n){
@@ -1343,6 +1402,7 @@ body.js-loading #menuToggle {
   font-size:1.1rem;
   font-weight:800;
   color:#1f2430;
+  padding-right:48px;
 }
 
 /* meta */
@@ -1360,6 +1420,7 @@ body.js-loading #menuToggle {
   background:#eaf2ff;
   padding:6px 10px;
   border-radius:999px;
+  white-space:nowrap;
 }
 
 .fav-section-modern .fav-card .arrow{

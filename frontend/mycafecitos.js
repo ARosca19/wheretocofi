@@ -75,23 +75,59 @@ if (tags) metaParts.push(tags);
 const metaText = metaParts.join(" · ") || "Saved coffee spot";
 
         // ai folosit deja ?id=slug în alte locuri, păstrez același pattern
+        const visited = Boolean(c.visited);
         return `
-          <a 
-            class="card fav-card" 
-            data-slug="${slug}" 
-            href="cafe.html?id=${encodeURIComponent(slug)}"
-          >
-            <div class="title">${title}</div>
-            <div class="row">
-              <div class="meta">${metaText}</div>
-              <div class="more">More info <span class="arrow">›</span></div>
-            </div>
-          </a>
+          <article class="card fav-card${visited ? " is-visited" : ""}" data-slug="${slug}">
+            <a class="fav-card-link" href="cafe.html?id=${encodeURIComponent(slug)}">
+              <div class="title">${title}</div>
+              <div class="row">
+                <div class="meta">${metaText}</div>
+                <div class="more">More info <span class="arrow">›</span></div>
+              </div>
+            </a>
+            <button
+              type="button"
+              class="visit-check"
+              aria-pressed="${visited}"
+              aria-label="${visited ? "Mark as not visited" : "Mark as visited"}"
+              title="${visited ? "Visited" : "Mark as visited"}"
+            ><span aria-hidden="true">✓</span></button>
+          </article>
         `;
       })
       .join("");
 
     favListEl.innerHTML = html;
+
+    favListEl.querySelectorAll(".visit-check").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const card = button.closest(".fav-card");
+        const slug = card?.dataset.slug;
+        if (!card || !slug || button.disabled) return;
+
+        const nextVisited = !card.classList.contains("is-visited");
+        button.disabled = true;
+        card.classList.add("is-updating");
+
+        try {
+          const result = await api(`/cafecitos/${encodeURIComponent(slug)}/visited`, {
+            method: "PATCH",
+            body: JSON.stringify({ visited: nextVisited }),
+          });
+          const visited = Boolean(result.visited);
+          card.classList.toggle("is-visited", visited);
+          button.setAttribute("aria-pressed", String(visited));
+          button.setAttribute("aria-label", visited ? "Mark as not visited" : "Mark as visited");
+          button.title = visited ? "Visited" : "Mark as visited";
+        } catch (error) {
+          console.error("Could not update visited state:", error);
+          showToast("Could not update the visit. Please try again.", "error", 2200);
+        } finally {
+          button.disabled = false;
+          card.classList.remove("is-updating");
+        }
+      });
+    });
   } catch (e) {
     console.error("Error loading /cafecitos:", e);
     emptyMsgEl.textContent =

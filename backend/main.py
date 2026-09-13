@@ -16,7 +16,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, EmailStr, Field, ConfigDict
 from sqlalchemy import (
-    create_engine, Column, Integer, String, DateTime,
+    create_engine, Column, Integer, String, DateTime, Boolean,
     func, text, Text, ForeignKey, Float
 )
 from sqlalchemy.exc import IntegrityError
@@ -123,6 +123,7 @@ class Cafecito(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey("cafegii.id"), nullable=False)
     cafe_id = Column(Integer, ForeignKey("cafenele.id"), nullable=False)
+    visited = Column(Boolean, nullable=False, default=False, server_default="0")
     created_at = Column(DateTime, nullable=False, server_default=func.now())
 
 
@@ -158,6 +159,11 @@ with engine.begin() as conn:
             conn.execute(text("ALTER TABLE cafenele ADD COLUMN area TEXT;"))
         if "tags" not in names_caf:
             conn.execute(text("ALTER TABLE cafenele ADD COLUMN tags TEXT;"))
+
+        cols_cafecito = conn.execute(text("PRAGMA table_info(cafecitos);")).all()
+        names_cafecito = {c[1] for c in cols_cafecito}
+        if "visited" not in names_cafecito:
+            conn.execute(text("ALTER TABLE cafecitos ADD COLUMN visited INTEGER NOT NULL DEFAULT 0;"))
 
         
         # guest + bon + translate + sentiment în reviews
@@ -556,10 +562,15 @@ class FavCafeOut(BaseModel):
     city: str
     area: Optional[str] = None
     tags: Optional[str] = None
+    visited: bool = False
     model_config = ConfigDict(from_attributes=True)
 
 class CafecitoToggleIn(BaseModel):
     slug: str
+
+
+class CafecitoVisitedIn(BaseModel):
+    visited: bool
 
 class TranslateOut(BaseModel):
     review_id: int
@@ -900,9 +911,10 @@ def profile_dashboard(
             name=c.name,
             city=c.city,
             area=c.area,
-            tags=c.tags
+            tags=c.tags,
+            visited=bool(fav.visited),
         )
-        for _, c in fav_rows
+        for fav, c in fav_rows
     ]
 
     favorites_count = (
@@ -1462,9 +1474,37 @@ def list_cafecitos(current_user: Cafegii = Depends(get_current_user), db: Sessio
         .all()
     )
     out: List[FavCafeOut] = []
-    for _, c in rows:
-        out.append(FavCafeOut(slug=c.slug, name=c.name, city=c.city, area=c.area, tags=c.tags))
+    for fav, c in rows:
+        out.append(FavCafeOut(
+            slug=c.slug,
+            name=c.name,
+            city=c.city,
+            area=c.area,
+            tags=c.tags,
+            visited=bool(fav.visited),
+        ))
     return out
+
+
+@app.patch("/cafecitos/{slug}/visited")
+def set_cafecito_visited(
+    slug: str,
+    payload: CafecitoVisitedIn,
+    current_user: Cafegii = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    fav = (
+        db.query(Cafecito)
+        .join(Cafenele, Cafecito.cafe_id == Cafenele.id)
+        .filter(Cafecito.user_id == current_user.id, Cafenele.slug == slug)
+        .first()
+    )
+    if not fav:
+        raise HTTPException(status_code=404, detail="Saved coffee shop not found.")
+
+    fav.visited = payload.visited
+    db.commit()
+    return {"visited": bool(fav.visited)}
 
 # ============================ CAFENELE – ADMIN =============================
 
