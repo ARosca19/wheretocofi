@@ -1,11 +1,13 @@
 param(
-  [int]$Port = 8000
+  [int]$Port = 8000,
+  [switch]$NoBrowser
 )
 
 $ErrorActionPreference = "Stop"
 
 $projectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $backendDir = Join-Path $projectRoot "backend"
+$frontendDir = Join-Path $projectRoot "frontend"
 $pythonPath = Join-Path $backendDir "venv\Scripts\python.exe"
 $localUrl = "http://127.0.0.1:$Port"
 $backendProcess = $null
@@ -44,7 +46,14 @@ try {
     Write-Host "Starting WhereToCofi on $localUrl ..." -ForegroundColor Cyan
     $backendProcess = Start-Process `
       -FilePath $pythonPath `
-      -ArgumentList @("-m", "uvicorn", "main:app", "--host", "127.0.0.1", "--port", $Port) `
+      -ArgumentList @(
+        "-m", "uvicorn", "main:app",
+        "--host", "127.0.0.1",
+        "--port", $Port,
+        "--reload",
+        "--reload-dir", $backendDir,
+        "--reload-dir", $frontendDir
+      ) `
       -WorkingDirectory $backendDir `
       -WindowStyle Hidden `
       -PassThru
@@ -66,6 +75,10 @@ try {
     if (-not $ready) {
       throw "The backend did not start on $localUrl. Check whether port $Port is already in use."
     }
+  }
+
+  if (-not $NoBrowser) {
+    Start-Process $localUrl
   }
 
   Write-Host "`nCreating a random public URL..." -ForegroundColor Cyan

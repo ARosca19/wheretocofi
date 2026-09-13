@@ -8,9 +8,13 @@ Run this command from the project directory:
 .\start-public.ps1
 ```
 
-The script starts the app when needed and prints a random public
+The script starts the app when needed, opens it locally in the browser and prints a random public
 `https://...trycloudflare.com` address. Keep the terminal open while the link
 is in use; press `Ctrl+C` to stop sharing it.
+
+Frontend changes are visible after refreshing the browser. Python changes
+restart the development server automatically. Use `Ctrl+F5` when the browser
+keeps an older CSS or JavaScript file in its cache.
 
 The generated address changes each time. Cloudflare Quick Tunnels are intended
 for demos and development, not permanent production hosting.

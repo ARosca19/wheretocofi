@@ -12,6 +12,7 @@ from datetime import datetime, timedelta
 from typing import Optional, List, Literal
 
 from fastapi import FastAPI, HTTPException, Depends, Header, status, UploadFile, File, Form
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, EmailStr, Field, ConfigDict
 from sqlalchemy import (
@@ -729,7 +730,7 @@ def seed_cafenele():
 
 @app.get("/")
 def root():
-    return {"status": "ok", "service": "auth+coffee"}
+    return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
 
 # ---------- SIGNUP / LOGIN / ME ----------
 
