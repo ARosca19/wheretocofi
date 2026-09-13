@@ -4,10 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!btn || !elements.length) return;
 
-  const API_BASE =
-    window.API_BASE ||
-    window.COFI_API_BASE ||
-    "http://127.0.0.1:8000";
+  const API_BASE = location.origin;
 
   const originalTexts = elements.map((el) => el.textContent.trim());
   let isRomanian = false;

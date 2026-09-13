@@ -71,13 +71,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       day: "numeric",
     });
   }
-  function getApiBaseForProfilePhotos() {
-  return (
-    window.API_BASE_URL ||
-    window.API_BASE ||
-    window.API_URL ||
-    "http://127.0.0.1:8000"
-  ).replace(/\/$/, "");
+function getApiBaseForProfilePhotos() {
+  return location.origin.replace(/\/$/, "");
 }
 
 function profilePhotoUrl(path) {

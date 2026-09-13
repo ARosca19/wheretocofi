@@ -1,6 +1,0 @@
-{
-    "liveServer.settings.root": "/frontend",
-    "liveServer.settings.file": "/index.html",
-    "python.terminal.activateEnvironment": true,
-    "python.envs.terminal.autoActivationType": "command",
-}

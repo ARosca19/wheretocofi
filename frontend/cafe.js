@@ -116,12 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const photoModalSubtitle = document.getElementById("photoModalSubtitle");
 
   function getApiBaseForPhotos() {
-    return (
-      window.API_BASE_URL ||
-      window.API_BASE ||
-      window.API_URL ||
-      "http://127.0.0.1:8000"
-    ).replace(/\/$/, "");
+    return location.origin.replace(/\/$/, "");
   }
 
   function photoPublicUrl(path) {
